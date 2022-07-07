@@ -1,7 +1,8 @@
 #include <bits/stdc++.h>
-using namspace std;
+using namespace std;
 
-int main() {
+int main()
+{
     cout << "hello world!" << endl;
     return 0;
 }
