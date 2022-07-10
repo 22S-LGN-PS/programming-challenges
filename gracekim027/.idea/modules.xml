@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/3n+1/3n+1.iml" filepath="$PROJECT_DIR$/3n+1/3n+1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JollyJumper/JollyJumper.iml" filepath="$PROJECT_DIR$/JollyJumper/JollyJumper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Yahtzee/Yahtzee.iml" filepath="$PROJECT_DIR$/Yahtzee/Yahtzee.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/gracekim027.iml" filepath="$PROJECT_DIR$/.idea/gracekim027.iml" />
+    </modules>
+  </component>
+</project>
