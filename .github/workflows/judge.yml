@@ -1,4 +1,4 @@
-name: C Judge
+name: C++ Judge
 
 on:
   push:
@@ -7,11 +7,11 @@ on:
     branches: [ "main", "feature/judge" ]
 
 jobs:
-  build:
+  judge:
   
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
     - name: judge 
-      run: sh ./lucetre/judge.sh
+      run: sh ./judge/submit.sh
