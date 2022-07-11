@@ -1,14 +1,15 @@
 name: C++ Judge
 
 on:
-  push:
-    branches: ["**"]
-  # pull_request:
-  #   branches: ["main"]
+  # push:
+  #   branches: ["**"]
+  pull_request:
+    branches: ["main"]
 
 jobs:
   judge:
     strategy:
+      fail-fast: false
       matrix:
         set:
           - problem: 100
@@ -21,6 +22,7 @@ jobs:
             code: "nick11967/Ch 2/9 Jolly Jumper/jolly_jumper.cpp"
 
     runs-on: ubuntu-latest
+    timeout-minutes: 1
 
     steps:
       - uses: actions/checkout@v3
