@@ -24,8 +24,7 @@ int main()
 {
     int a, b;
     int max_cycle, cycle;
-    cin >> a >> b;
-    while (a != '\n')
+    while (cin >> a >> b)
     {
         max_cycle = 0;
         for (int i = a; i <= b; i++)
@@ -34,7 +33,6 @@ int main()
             (max_cycle < cycle) ? max_cycle = cycle : max_cycle = max_cycle;
         }
         cout << a << ' ' << b << ' ' << max_cycle << '\n';
-        cin >> a >> b;
     }
     return 0;
 }
