@@ -2,7 +2,7 @@ name: C++ Judge
 
 on:
   push:
-    branches: ["*"]
+    branches: ["**"]
   pull_request:
     branches: ["main"]
 
