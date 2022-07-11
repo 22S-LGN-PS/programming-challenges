@@ -1,4 +1,24 @@
-sh .judge/judge.sh 100 "lucetre/chap01/100/main.cpp"
-# sh .judge/judge.sh 100 "nick11967/Ch 1/1 The 3n+1 Problem/the_3n+1_problem.cpp"
-sh .judge/judge.sh 10038 "lucetre/chap02/10038/main.cpp"
-# sh .judge/judge.sh 10038 "nick11967/Ch 2/9 Jolly Jumper/jolly_jumper.cpp"
+# sh .judge/judge.sh 10038 lucetre/chap02/10038/main.cpp
+prob="testcase/$1"
+echo "\n$1: $2\n-------------"
+cp "$2" .judge/main.cpp
+cd .judge
+g++ main.cpp
+
+for file in $prob/*.testin
+do
+    name=${file##*/}
+    tc=${name%.testin}
+    
+    echo "TESTCASE #$tc"
+    ./a.out < $prob/$tc.testin > $prob/$tc.out
+    diff $prob/$tc.out $prob/$tc.testout -b
+    res=$(diff $prob/$tc.out $prob/$tc.testout -b | wc -l)
+
+    if [ $res -eq 0 ]
+    then
+      echo "✓ PASS\n-------------"
+    else
+    	echo "✗ WRONG\n-------------"
+	fi
+done

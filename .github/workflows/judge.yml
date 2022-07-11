@@ -21,4 +21,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: C++ Judge
-      run: sh .judge/judge.sh ${{ matrix.set.problem }} ${{ matrix.set.code }} 
+      run: sh .judge/submit.sh ${{ matrix.set.problem }} ${{ matrix.set.code }} 
