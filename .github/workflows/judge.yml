@@ -13,6 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: judge
-      run: cd ./lucetre/
-      run: sh ./judge.sh
+    - name: judge 
+      run: 
+      - cd ./lucetre/
+      - sh ./judge.sh
