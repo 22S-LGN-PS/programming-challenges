@@ -20,5 +20,6 @@ do
       echo "✓ PASS\n-------------"
     else
     	echo "✗ WRONG\n-------------"
+      exit 1
 	fi
 done
