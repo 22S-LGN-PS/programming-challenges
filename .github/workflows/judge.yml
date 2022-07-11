@@ -10,14 +10,15 @@ jobs:
   judge:
     strategy:
       matrix:
-      - problem: 100
-        code: "lucetre/chap01/100/main.cpp"
-      - problem: 10038
-        code: "lucetre/chap02/10038/main.cpp"
+        set:
+        - problem: 100
+          code: "lucetre/chap01/100/main.cpp"
+        - problem: 10038
+          code: "lucetre/chap02/10038/main.cpp"
         
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
     - name: C++ Judge
-      run: sh .judge/judge.sh ${{ matrix.problem }} ${{ matrix.code }} 
+      run: sh .judge/judge.sh ${{ matrix.set.problem }} ${{ matrix.set.code }} 
