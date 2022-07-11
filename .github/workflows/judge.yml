@@ -14,6 +14,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: judge 
-      run: |
-        cd ./lucetre/
-        sh ./judge.sh
+      run: sh ./lucetre/judge.sh
