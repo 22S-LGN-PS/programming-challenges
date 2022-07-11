@@ -33,7 +33,7 @@ int main()
     int n;
     while (cin >> n)
     {
-        cout << (Jolly(n) ? "Jolly" : "Not Jolly") << endl;
+        cout << (Jolly(n) ? "Jolly" : "Not jolly") << endl;
     }
     return 0;
 }

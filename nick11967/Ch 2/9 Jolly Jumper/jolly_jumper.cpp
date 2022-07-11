@@ -8,8 +8,7 @@ int main()
     int n, pre, cur;
     int diff;
     bool jolly;
-    cin >> n;
-    while (n != '\n')
+    while (cin >> n)
     {
         jolly = true;
         for (int i = 0; i <= n; i++)
@@ -33,7 +32,6 @@ int main()
         }
 
         jolly ? cout << "Jolly\n" : cout << "Not Jolly\n";
-        cin >> n;
     }
     return 0;
 }
