@@ -17,8 +17,8 @@ then
       
       echo "TESTCASE #$tc"
       java ${code%.java} < $prob/$tc.testin > $prob/$tc.out
-      diff $prob/$tc.out $prob/$tc.testout -b
-      res=$(diff $prob/$tc.out $prob/$tc.testout -b | wc -l)
+      diff $prob/$tc.out $prob/$tc.testout -B -w
+      res=$(diff $prob/$tc.out $prob/$tc.testout -B -w | wc -l)
 
       if [ $res -eq 0 ]
       then
@@ -39,8 +39,8 @@ then
       
       echo "TESTCASE #$tc"
       ./a.out < $prob/$tc.testin > $prob/$tc.out
-      diff $prob/$tc.out $prob/$tc.testout -b
-      res=$(diff $prob/$tc.out $prob/$tc.testout -b | wc -l)
+      diff $prob/$tc.out $prob/$tc.testout -B -w
+      res=$(diff $prob/$tc.out $prob/$tc.testout -B -w | wc -l)
 
       if [ $res -eq 0 ]
       then

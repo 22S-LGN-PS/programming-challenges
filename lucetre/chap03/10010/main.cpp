@@ -48,11 +48,15 @@ void Waldorf()
         for (int j = 0; j < word.length(); j++)
             word[j] = ToLower(word[j]);
 
+        bool flag = false;
         for (int sy = 0; sy < m; sy++)
         {
+            if (flag)
+                break;
             for (int sx = 0; sx < n; sx++)
             {
-                int flag = false;
+                if (flag)
+                    break;
                 for (int dir = 0; dir < 8; dir++)
                 {
                     if (Check(word, sy, sx, dir))
@@ -68,6 +72,7 @@ void Waldorf()
             }
         }
     }
+    cout << endl;
 }
 
 int main()
