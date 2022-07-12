@@ -40,6 +40,7 @@ jobs:
             |Problem|Source Code|Status|
             |:------:|:---:|:---:|
             |**${{ matrix.set.problem }}**|${{ matrix.set.code }}|:question:|
+          comment_includes: ${{ matrix.set.code }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Github Action Judge
