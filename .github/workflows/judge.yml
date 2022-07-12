@@ -32,6 +32,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: Initialize Judge Result
+        uses: thollander/actions-comment-pull-request@v1
+        with:
+          message: |
+            |Problem|Source Code|Status|
+            |:------:|:---:|:---:|
+            |**${{ matrix.set.problem }}**|${{ matrix.set.code }}|:question:|
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Github Action Judge
         run: sh .judge/submit.sh "${{ matrix.set.problem }}" "${{ matrix.set.code }}"
 
