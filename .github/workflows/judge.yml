@@ -39,7 +39,7 @@ jobs:
         uses: thollander/actions-comment-pull-request@v1
         with:
           message: |
-            ${{ matrix.set.problem }}
-            ${{ matrix.set.code }}
+            **${{ matrix.set.problem }}** ${{ matrix.set.code }}
           reactions: hooray
+          comment_includes: ${{ matrix.set.code }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
