@@ -135,28 +135,38 @@ void OptimizeScore()
             {
                 for (auto ms : maxScore[i - 1])
                 {
+                    // cout << bitset<C>(ms.first) << ": " << ms.second.first << endl;
+
                     if ((ms.first & (1 << (p.second - 1))) == 0)
                     {
                         state = ms.first | (1 << (p.second - 1));
-                        maxScore[i][state] = max(maxScore[i][state], make_pair(ms.second.first + p.first, ms.second.second + bonus));
-                        path[i][state] = ms.first;
+                        pair<int, int> score = make_pair(ms.second.first + p.first, ms.second.second + bonus);
+                        if (maxScore[i][state] < score)
+                        {
+                            maxScore[i][state] = score;
+                            path[i][state] = ms.first;
+                        }
                     }
                 }
             }
         }
     }
-
-    int bestState = 0, bestTotal = 0, bestBonus = 0;
-    for (auto ms : maxScore[C - 1])
+    // 3 2 6 12 10 12 24 21 0 0 0 35 40 0 165
+    int bestI = 0, bestState = 0, bestTotal = 0, bestBonus = 0;
+    for (int i = 0; i < C; i++)
     {
-        int bonus = ms.second.second >= 63 ? 35 : 0;
-        int total = ms.second.first + bonus;
-        // cout << bitset<C>(ms.first) << ": " << total << endl;
-        if (bestTotal < total)
+        for (auto ms : maxScore[i])
         {
-            bestTotal = total;
-            bestBonus = bonus;
-            bestState = ms.first;
+            int bonus = ms.second.second >= 63 ? 35 : 0;
+            int total = ms.second.first + bonus;
+            // cout << bitset<C>(ms.first) << ": " << total << endl;
+            if (bestTotal < total)
+            {
+                bestTotal = total;
+                bestBonus = bonus;
+                bestState = ms.first;
+                bestI = i;
+            }
         }
     }
     // cout << endl;
@@ -166,7 +176,7 @@ void OptimizeScore()
     bestScores[C + 1] = bestTotal;
 
     int prev = bestState;
-    for (int i = C - 1; i >= 0; i--)
+    for (int i = bestI; i >= 0; i--)
     {
         int curr = path[i][prev];
         if (curr ^ prev)
