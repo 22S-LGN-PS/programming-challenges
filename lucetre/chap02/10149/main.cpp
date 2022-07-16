@@ -107,20 +107,20 @@ void OptimizeScore()
 
     FetchScore();
 
-    for (int i = 0; i < C; i++)
-    {
-        for (int j = 0; j < D; j++)
-        {
-            cout << dice[i][j];
-        }
-        cout << ": ";
-        for (auto p : possible[i])
-        {
-            cout << p.first << "(" << p.second << ") ";
-        }
-        cout << endl;
-    }
-    cout << endl;
+    // for (int i = 0; i < C; i++)
+    // {
+    //     for (int j = 0; j < D; j++)
+    //     {
+    //         cout << dice[i][j];
+    //     }
+    //     cout << ": ";
+    //     for (auto p : possible[i])
+    //     {
+    //         cout << p.first << "(" << p.second << ") ";
+    //     }
+    //     cout << endl;
+    // }
+    // cout << endl;
 
     for (int i = 0; i < C; i++)
     {
@@ -172,11 +172,18 @@ void OptimizeScore()
         if (curr ^ prev)
         {
             int yahtzee = log2(curr ^ prev);
-            cout << bitset<C>(curr) << " " << yahtzee << endl;
+            // cout << bitset<C>(curr) << " " << yahtzee << endl;
+            for (auto p : possible[i])
+            {
+                if (p.second - 1 == yahtzee)
+                {
+                    bestScores[yahtzee] = p.first;
+                }
+            }
         }
         prev = curr;
     }
-    cout << bitset<C>(bestState) << ": " << bestTotal << "," << bestBonus << endl;
+    // cout << bitset<C>(bestState) << ": " << bestTotal << "," << bestBonus << endl;
 
     for (int i = 0; i < C + 2; i++)
     {
