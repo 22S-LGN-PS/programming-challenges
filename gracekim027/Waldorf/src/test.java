@@ -68,25 +68,6 @@ class Case{
 
         Pair startPoint = new Pair(50, 50);
 
-        if (searchLeft(word) != null && startPoint.compareTo(searchLeft(word)) == -1){
-            startPoint = searchLeft(word);
-        }
-
-        if (searchDiagonalLeft(word) != null && startPoint.compareTo(searchDiagonalLeft(word)) == -1){
-            startPoint = searchLeft(word);
-        }
-
-        if (searchRight(word) != null && startPoint.compareTo(searchRight(word)) == -1){
-            startPoint = searchLeft(word);
-        }
-
-        if (searchDiagonalRight(word) != null && startPoint.compareTo(searchDiagonalRight(word)) == -1){
-            startPoint = searchLeft(word);
-        }
-
-        if (searchUpDown(word) != null && startPoint.compareTo(searchUpDown(word)) == -1){
-            startPoint = searchLeft(word);
-        }
 
         return startPoint.getXPos() + " " + startPoint.getYPos();
 
@@ -96,9 +77,6 @@ class Case{
         //if right (a, b+i), right up diagonal (a-i, b+i)
         //if upward (a-i, b), left down diagonal (a+i, b-i)
         //if downward (a+i, b), right down diognal (a+i, b+i)
-
-        //search up, down --> 그러면 변수가 left/right/diagonal
-        //search left/right/diagonal --> 그러면 변수가 search up/down
 
     }
 
@@ -126,54 +104,6 @@ class Case{
         }
 
     }
-
-    public Pair searchDiagonalLeft(String word){
-        boolean exists = false;
-        int startX = 0;
-        int startY = 0;
-        if (exists){
-            return new Pair(startX, startY);
-        }else{
-            return null;
-        }
-    }
-
-    public Pair searchRight(String word){
-        boolean exists = false;
-        int startX = 0;
-        int startY = 0;
-        if (exists){
-            return new Pair(startX, startY);
-        }else{
-            return null;
-        }
-
-    }
-
-    public Pair searchDiagonalRight(String word){
-        boolean exists = false;
-        int startX = 0;
-        int startY = 0;
-        if (exists){
-            return new Pair(startX, startY);
-        }else{
-            return null;
-        }
-
-    }
-
-    public Pair searchUpDown(String word){
-        boolean exists = false;
-        int startX = 0;
-        int startY = 0;
-        if (exists){
-            return new Pair(startX, startY);
-        }else{
-            return null;
-        }
-    }
-
-}
 
 class Pair{
     int xPos;
