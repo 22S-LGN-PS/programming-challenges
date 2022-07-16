@@ -4,7 +4,8 @@ using namespace std;
 
 void CommonPermutation(string a, string b)
 {
-    int cntA[N + 1] = {0}, cntB[N + 1] = {0};
+    int cntA[N + 1] = {0};
+    int cntB[N + 1] = {0};
 
     for (auto ai : a)
         cntA[ai - 'a']++;
