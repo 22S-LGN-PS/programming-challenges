@@ -86,7 +86,7 @@ class Case{
         for (Pair instruction: instructions){
             for (int i=0; i<row; i++){
                 for( int j=0; j<column; j++){
-                    Pair resultPoint = searchAccording(word, instruction, 0, i, j);
+                    Pair resultPoint = searchAccording(word, instruction, 0, i, j, new Pair(50, 50));
 
                     if (resultPoint != null && startPoint.compareTo(resultPoint) == -1){
                         startPoint.swap(resultPoint);
@@ -98,9 +98,8 @@ class Case{
         return startPoint.getXPos()+1 + " " + startPoint.getYPos()+1;
     }
 
-    public Pair searchAccording(String word, Pair instruction, int times, int xPoint, int yPoint){
+    public Pair searchAccording(String word, Pair instruction, int times, int xPoint, int yPoint, Pair result){
 
-        Pair result = new Pair(50, 50);
         if (times == word.length()){
             return result;
         }else{
@@ -109,9 +108,9 @@ class Case{
 
             //up 는 항상 (a-i, *) down 는 항상 (a+i, *)
             //diagonal 은 그냥 (x,y) 모두 합쳤을 떄의 결과물 (고려 X)
-            if (Character.toLowerCase(word.charAt(times)) == Character.toLowerCase(charMatrix[xPoint][yPoint]) && xPoint <= row && yPoint <= column){
+            if (Character.toLowerCase(word.charAt(times)) == Character.toLowerCase(charMatrix[xPoint][yPoint]) && xPoint < row && yPoint < column){
                 result = searchAccording(word, instruction, times+1,
-                        xPoint+instruction.getXPos(), yPoint+instruction.getYPos());
+                        xPoint+instruction.getXPos(), yPoint+instruction.getYPos(), result);
             }else{
                return null;
             }
