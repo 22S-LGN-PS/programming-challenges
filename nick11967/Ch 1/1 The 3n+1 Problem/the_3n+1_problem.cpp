@@ -26,6 +26,12 @@ int main()
     int max_cycle, cycle;
     while (cin >> a >> b)
     {
+        if (a > b)
+        {
+            int temp = a;
+            a = b;
+            b = temp;
+        }
         max_cycle = 0;
         for (int i = a; i <= b; i++)
         {
