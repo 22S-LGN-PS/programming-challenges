@@ -17,6 +17,8 @@ public class test{
                     matrix[j] = sc.nextLine();
                 }
 
+                matrix[rows-1] = sc.nextLine();
+
                 int numWords = sc.nextInt();
                 String[] words = new String[numWords];
 
@@ -34,7 +36,6 @@ public class test{
 }
 
 class Case{
-    private String[] matrix;
     private char[][] charMatrix;
     private String[] words;
     private int row;
@@ -42,7 +43,6 @@ class Case{
 
 
     Case(String[] matrix, String[] words, int row, int column){
-        this.matrix = matrix;
         this.words = words;
         char[][] charMatrix = new char[row][column];
         this.row = row;
@@ -111,12 +111,12 @@ class Case{
 
             //up 는 항상 (a-i, *) down 는 항상 (a+i, *)
             //diagonal 은 그냥 (x,y) 모두 합쳤을 떄의 결과물 (고려 X)
-            if ((word.charAt(times) == charMatrix[xPoint][yPoint]) && xPoint > 0 && yPoint > 0
+            if ((word.charAt(times) == charMatrix[xPoint-1][yPoint-1]) && xPoint > 0 && yPoint > 0
             && xPoint <= row && yPoint <=column){
                 result = searchAccording(word, instruction, times+1,
                         xPoint+instruction.getXPos(), yPoint+instruction.getYPos());
             }else{
-                return null;
+               return null;
             }
         }
         return result;
