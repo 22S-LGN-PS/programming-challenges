@@ -64,22 +64,64 @@ class Case{
     }
 
     public String find(String word){
-        //find String in the matrix (can be any way digonal // upper //lower ...
-
-        Pair startPoint = new Pair(50, 50);
-
-
-        return startPoint.getXPos() + " " + startPoint.getYPos();
+        //find String in the matrix (can be any way diagonal // upper //lower ...
+        //방향 관련해서는 어디 참고함...
 
         //if the first letter is (a,b)
         //then the ith letter should be
-        // if left (a, b-i), left up diagonal (a-i, b-i)
+        //if left (a, b-i), left up diagonal (a-i, b-i)
         //if right (a, b+i), right up diagonal (a-i, b+i)
         //if upward (a-i, b), left down diagonal (a+i, b-i)
         //if downward (a+i, b), right down diognal (a+i, b+i)
 
+
+        Pair startPoint = new Pair(50, 50);
+        ArrayList<Pair> instructions = new ArrayList<>();
+        instructions.add(new Pair(-1, -1));
+        instructions.add(new Pair(-1, 0));
+        instructions.add(new Pair(-1, 1));
+        instructions.add(new Pair(0, -1));
+        instructions.add(new Pair(0, 1));
+        instructions.add(new Pair(1, -1));
+        instructions.add(new Pair(1, 0));
+        instructions.add(new Pair(1, 1));
+
+        for (Pair instruction: instructions){
+                Pair resultPoint = searchAccording(word, instruction, 0, row, column);
+                if (startPoint.compareTo(resultPoint) == -1){
+                    startPoint.swap(resultPoint);
+                }
+        }
+
+        return startPoint.getXPos() + " " + startPoint.getYPos();
     }
 
+    public Pair searchAccording(String word, Pair instruction, int times, int xPoint, int yPoint){
+        //없으면 return
+        //if instruction x = 1: down, x= -1: up, x=0: nothing
+        //if instruction y= 1: right, x=-1: left,
+        //만약 x, y 중에 0이 없으면 diagonal
+
+        Pair result = new Pair(50, 50);
+        if (times >= word.length()){
+            return result;
+        }else{
+            //left (a, b-i) left diagonal up (a-i, b-i), left diagonal down (a+i, b-i)
+            //left 는 항상 (*, b-i), right 는 항상 (*, b+i)
+
+            //up 는 항상 (a-i, *) down 는 항상 (a+i, *)
+            //diagonal 은 그냥 (x,y) 모두 합쳤을 떄의 결과물 (고려 X)
+            if (word.charAt(times) == charMatrix[xPoint][yPoint]){
+                result = searchAccording(word, instruction, times+1,
+                        xPoint+instruction.getXPos(), yPoint+instruction.getYPos());
+            }else{
+                return null;
+            }
+        }
+        return result;
+    }
+
+    /*
     public Pair searchLeft(String word){
         boolean exists = true;
         // to search left, start at least at the length column
@@ -103,7 +145,7 @@ class Case{
             return null;
         }
 
-    }
+    }*/
 
 class Pair{
     int xPos;
@@ -133,4 +175,12 @@ class Pair{
             }
         }
     }
+
+    public void swap(Pair newPair){
+        xPos = newPair.getXPos();
+        yPos = newPair.getYPos();
+    }
+    }
 }
+
+
