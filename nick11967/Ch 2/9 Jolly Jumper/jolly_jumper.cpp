@@ -1,4 +1,4 @@
-#include <iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -19,10 +19,8 @@ int main()
         {
             cin >> cur;
             diff = pre - cur;
-            if (diff < 0)
-                diff *= -1;
-            diff_check[diff] = true;
-
+            if (abs(diff) < n)
+                diff_check[abs(diff)] = true;
             pre = cur;
         }
         for (int i = 1; i <= n - 1; i++)
@@ -31,7 +29,7 @@ int main()
                 jolly = false;
         }
 
-        jolly ? cout << "Jolly\n" : cout << "Not Jolly\n";
+        jolly ? cout << "Jolly\n" : cout << "Not jolly\n";
     }
     return 0;
 }
