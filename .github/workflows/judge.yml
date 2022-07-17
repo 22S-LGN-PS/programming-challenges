@@ -28,7 +28,7 @@ jobs:
           #   code: "gracekim027/JollyJumper/src/test.java"
           - problem: 10010
             code: "gracekim027/Waldorf/src/test.java"
-          - problem: 10010
+          - problem: 10049
             code: "gracekim027/CommonPermutation/src/test.java"
 
     runs-on: ubuntu-latest
