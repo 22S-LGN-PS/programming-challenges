@@ -6,3 +6,4 @@
 # sh .judge/submit.sh 100 "gracekim027/3n+1/src/test.java"
 # sh .judge/submit.sh 10038 "gracekim027/JollyJumper/src/test.java"
 sh .judge/submit.sh 10010 "nick11967/Ch 3/18 Wheres Waldorf/waldorf.cpp"
+sh .judge/submit.sh 10252 "nick11967/Ch 3/19 Common Permutation/common_permutation.cpp"

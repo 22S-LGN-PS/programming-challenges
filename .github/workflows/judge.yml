@@ -14,6 +14,8 @@ jobs:
         set:
           - problem: 10010
             code: "nick11967/Ch 3/18 Wheres Waldorf/waldorf.cpp"
+          - problem: 10252
+            code: "nick11967/Ch 3/19 Common Permutation/common_permutation.cpp"
 
     runs-on: ubuntu-latest
     timeout-minutes: 1
