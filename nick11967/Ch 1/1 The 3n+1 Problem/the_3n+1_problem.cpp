@@ -23,17 +23,22 @@ int f(int n)
 int main()
 {
     int a, b;
+    int m, n;
     int max_cycle, cycle;
     while (cin >> a >> b)
     {
         if (a > b)
         {
-            int temp = a;
-            a = b;
-            b = temp;
+            m = b;
+            n = a;
+        }
+        else
+        {
+            m = a;
+            n = b;
         }
         max_cycle = 0;
-        for (int i = a; i <= b; i++)
+        for (int i = m; i <= n; i++)
         {
             cycle = f(i);
             (max_cycle < cycle) ? max_cycle = cycle : max_cycle = max_cycle;
