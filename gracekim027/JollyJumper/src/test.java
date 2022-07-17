@@ -14,7 +14,7 @@ public class test {
                 }
 
                 boolean contains = true;
-                int[] allDiffs = new int[size];
+                boolean[] allDiffs = new boolean[size];
 
                 for (int i = 0; i < size - 1; i++) {
                     int diff = numbers[i] - numbers[i + 1];
@@ -22,12 +22,12 @@ public class test {
                         diff = -diff;
                     }
                     if (diff < size) {
-                        allDiffs[diff] = 1;
+                        allDiffs[diff] = false;
                     }
                 }
 
                 for (int i=1; i<allDiffs.length; i++) {
-                    if (allDiffs[i] == 0) {
+                    if (!allDiffs[i]) {
                         contains = false;
                         break;
                     }
