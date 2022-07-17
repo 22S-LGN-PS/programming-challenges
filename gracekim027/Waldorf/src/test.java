@@ -88,7 +88,7 @@ class Case{
 
         for (Pair instruction: instructions){
                 Pair resultPoint = searchAccording(word, instruction, 0, row, column);
-                if (startPoint.compareTo(resultPoint) == -1){
+                if (resultPoint != null && startPoint.compareTo(resultPoint) == -1){
                     startPoint.swap(resultPoint);
                 }
         }
@@ -103,7 +103,7 @@ class Case{
         //만약 x, y 중에 0이 없으면 diagonal
 
         Pair result = new Pair(50, 50);
-        if (times >= word.length()){
+        if (times == word.length()){
             return result;
         }else{
             //left (a, b-i) left diagonal up (a-i, b-i), left diagonal down (a+i, b-i)
@@ -111,7 +111,8 @@ class Case{
 
             //up 는 항상 (a-i, *) down 는 항상 (a+i, *)
             //diagonal 은 그냥 (x,y) 모두 합쳤을 떄의 결과물 (고려 X)
-            if (word.charAt(times) == charMatrix[xPoint][yPoint]){
+            if ((word.charAt(times) == charMatrix[xPoint][yPoint]) && xPoint > 0 && yPoint > 0
+            && xPoint <= row && yPoint <=column){
                 result = searchAccording(word, instruction, times+1,
                         xPoint+instruction.getXPos(), yPoint+instruction.getYPos());
             }else{
