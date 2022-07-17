@@ -16,8 +16,8 @@ jobs:
             code: "lucetre/chap01/100/main.cpp"
           - problem: 10038
             code: "lucetre/chap02/10038/main.cpp"
-          - problem: 10149
-            code: "lucetre/chap02/10149/main.cpp"
+          # - problem: 10149
+          #   code: "lucetre/chap02/10149/main.cpp"
           - problem: 10010
             code: "lucetre/chap03/10010/main.cpp"
           - problem: 10252
