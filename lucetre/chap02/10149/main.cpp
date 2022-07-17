@@ -124,13 +124,22 @@ void OptimizeScore()
 
     for (int i = 0; i < C; i++)
     {
+        if (i)
+        {
+            for (auto ms : maxScore[i - 1])
+            {
+                maxScore[i][ms.first] = ms.second;
+                path[i][ms.first] = ms.first;
+            }
+        }
         for (auto p : possible[i])
         {
             state = 1 << (p.second - 1);
             int bonus = (p.second <= SIXES) ? p.first : 0;
 
-            maxScore[i][state] = max(maxScore[i][state], make_pair(p.first, bonus));
+            maxScore[i][state] = make_pair(p.first, bonus);
             path[i][0] = path[i][state] = 0;
+
             if (i)
             {
                 for (auto ms : maxScore[i - 1])

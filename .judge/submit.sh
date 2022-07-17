@@ -25,7 +25,7 @@ then
         echo "✓ PASS\n-------------"
       else
         echo "✗ WRONG\n-------------"
-        exit 1
+        # exit 1
     fi
   done
 elif [ ${code##*.} = 'cpp' ]
@@ -47,7 +47,7 @@ then
         echo "✓ PASS\n-------------"
       else
         echo "✗ WRONG\n-------------"
-        exit 1
+        # exit 1
     fi
   done
 fi
