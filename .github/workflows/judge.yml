@@ -3,8 +3,8 @@ name: Github Action Judge
 on:
   push:
     branches: ["**"]
-  # pull_request:
-  #   branches: ["main"]
+  pull_request:
+    branches: ["main"]
 
 jobs:
   judge:
@@ -49,26 +49,26 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Initialize Judge Result
-        uses: thollander/actions-comment-pull-request@v1
-        with:
-          message: |
-            |Problem|Source Code|Status|
-            |:------:|:---:|:---:|
-            |**${{ matrix.set.problem }}**|${{ matrix.set.code }}|:question:|
-          comment_includes: ${{ matrix.set.code }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Initialize Judge Result
+      #   uses: thollander/actions-comment-pull-request@v1
+      #   with:
+      #     message: |
+      #       |Problem|Source Code|Status|
+      #       |:------:|:---:|:---:|
+      #       |**${{ matrix.set.problem }}**|${{ matrix.set.code }}|:question:|
+      #     comment_includes: ${{ matrix.set.code }}
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Github Action Judge
         run: sh .judge/submit.sh "${{ matrix.set.problem }}" "${{ matrix.set.code }}"
 
-      - name: Comment Judge Result
-        uses: thollander/actions-comment-pull-request@v1
-        with:
-          message: |
-            |Problem|Source Code|Status|
-            |:------:|:---:|:---:|
-            |**${{ matrix.set.problem }}**|${{ matrix.set.code }}|:+1:|
-          reactions: hooray
-          comment_includes: ${{ matrix.set.code }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Comment Judge Result
+      #   uses: thollander/actions-comment-pull-request@v1
+      #   with:
+      #     message: |
+      #       |Problem|Source Code|Status|
+      #       |:------:|:---:|:---:|
+      #       |**${{ matrix.set.problem }}**|${{ matrix.set.code }}|:+1:|
+      #     reactions: hooray
+      #     comment_includes: ${{ matrix.set.code }}
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
