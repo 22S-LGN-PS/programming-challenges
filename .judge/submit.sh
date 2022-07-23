@@ -60,7 +60,7 @@ then
       tc=${name%.testin}
       
       echo "TESTCASE #$tc"
-      ${code%.go} < $prob/$tc.testin > $prob/$tc.out
+      ./${code%.go} < $prob/$tc.testin > $prob/$tc.out
       diff $prob/$tc.out $prob/$tc.testout -B -w
       res=$(diff $prob/$tc.out $prob/$tc.testout -B -w | wc -l)
 
