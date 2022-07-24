@@ -50,4 +50,26 @@ then
         exit 1
     fi
   done
+elif [ ${code##*.} = 'go' ]
+then
+  go build $code
+
+  for file in $prob/*.testin
+  do
+      name=${file##*/}
+      tc=${name%.testin}
+      
+      echo "TESTCASE #$tc"
+      ./${code%.go} < $prob/$tc.testin > $prob/$tc.out
+      diff $prob/$tc.out $prob/$tc.testout -B -w
+      res=$(diff $prob/$tc.out $prob/$tc.testout -B -w | wc -l)
+
+      if [ $res -eq 0 ]
+      then
+        echo "✓ PASS\n-------------"
+      else
+        echo "✗ WRONG\n-------------"
+        exit 1
+    fi
+  done
 fi

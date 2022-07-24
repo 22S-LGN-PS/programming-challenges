@@ -17,6 +17,8 @@ public class test{
                     matrix[j] = sc.nextLine();
                 }
 
+                matrix[rows-1] = sc.nextLine();
+
                 int numWords = sc.nextInt();
                 String[] words = new String[numWords];
 
@@ -34,7 +36,6 @@ public class test{
 }
 
 class Case{
-    private String[] matrix;
     private char[][] charMatrix;
     private String[] words;
     private int row;
@@ -42,7 +43,6 @@ class Case{
 
 
     Case(String[] matrix, String[] words, int row, int column){
-        this.matrix = matrix;
         this.words = words;
         char[][] charMatrix = new char[row][column];
         this.row = row;
@@ -64,46 +64,60 @@ class Case{
     }
 
     public String find(String word){
-        //find String in the matrix (can be any way digonal // upper //lower ...
-
-        Pair startPoint = new Pair(50, 50);
-
-
-        return startPoint.getXPos() + " " + startPoint.getYPos();
-
         //if the first letter is (a,b)
         //then the ith letter should be
-        // if left (a, b-i), left up diagonal (a-i, b-i)
+        //if left (a, b-i), left up diagonal (a-i, b-i)
         //if right (a, b+i), right up diagonal (a-i, b+i)
         //if upward (a-i, b), left down diagonal (a+i, b-i)
         //if downward (a+i, b), right down diognal (a+i, b+i)
 
-    }
 
-    public Pair searchLeft(String word){
-        boolean exists = true;
-        // to search left, start at least at the length column
-        // to search left diagonal
-        int startX = 0;
-        int startY = 0;
+        Pair startPoint = new Pair(50, 50);
+        ArrayList<Pair> instructions = new ArrayList<>();
+        instructions.add(new Pair(-1, -1));
+        instructions.add(new Pair(-1, 0));
+        instructions.add(new Pair(-1, 1));
+        instructions.add(new Pair(0, -1));
+        instructions.add(new Pair(0, 1));
+        instructions.add(new Pair(1, -1));
+        instructions.add(new Pair(1, 0));
+        instructions.add(new Pair(1, 1));
 
-        for (int i=0; i<row; i++){
-            for (int j=column-1; j>column-word.length(); j--){
-                for (int k=j; )
-                if (charMatrix[i][j] != word.charAt(word.length()-j-1)){
-                    exists = false;
-                    break;
+        for (Pair instruction: instructions){
+            for (int i=0; i<row; i++){
+                for( int j=0; j<column; j++){
+                    Pair resultPoint = searchAccording(word, instruction, 0, i, j, new Pair(50, 50));
+
+                    if (resultPoint != null && startPoint.compareTo(resultPoint) == -1){
+                        startPoint.swap(resultPoint);
+                    }
                 }
             }
         }
 
-        if (exists){
-            return new Pair(startX, startY);
-        }else{
-            return null;
-        }
-
+        return startPoint.getXPos()+1 + " " + startPoint.getYPos()+1;
     }
+
+    public Pair searchAccording(String word, Pair instruction, int times, int xPoint, int yPoint, Pair result){
+
+        if (times == word.length()){
+            return result;
+        }else{
+            //left (a, b-i) left diagonal up (a-i, b-i), left diagonal down (a+i, b-i)
+            //left 는 항상 (*, b-i), right 는 항상 (*, b+i)
+
+            //up 는 항상 (a-i, *) down 는 항상 (a+i, *)
+            //diagonal 은 그냥 (x,y) 모두 합쳤을 떄의 결과물 (고려 X)
+            if (Character.toLowerCase(word.charAt(times)) == Character.toLowerCase(charMatrix[xPoint][yPoint]) && xPoint < row && yPoint < column){
+                result = searchAccording(word, instruction, times+1,
+                        xPoint+instruction.getXPos(), yPoint+instruction.getYPos(), result);
+            }else{
+               return null;
+            }
+        }
+        return result;
+    }
+
 
 class Pair{
     int xPos;
@@ -133,4 +147,12 @@ class Pair{
             }
         }
     }
+
+    public void swap(Pair newPair){
+        xPos = newPair.getXPos();
+        yPos = newPair.getYPos();
+    }
+    }
 }
+
+
