@@ -9,7 +9,7 @@ sh .judge/submit.sh 10152 "lucetre/chap04/10152/main.cpp"
 # sh .judge/submit.sh 10149 "nick11967/Ch 2/16 Yahtzee/yahtzee.cpp"
 # sh .judge/submit.sh 10010 "nick11967/Ch 3/18 Wheres Waldorf/waldorf.cpp"
 # sh .judge/submit.sh 10252 "nick11967/Ch 3/19 Common Permutation/common_permutation.cpp"
-# sh .judge/submit.sh 10152 "nick11967/Ch 3/19 Common Permutation/common_permutation.cpp"
+sh .judge/submit.sh 10152 "nick11967/Ch 4/31 ShellSort/shellsort.cpp"
 
 # sh .judge/submit.sh 100 "gracekim027/3n+1/src/test.java"
 # sh .judge/submit.sh 10038 "gracekim027/JollyJumper/src/test.java"
