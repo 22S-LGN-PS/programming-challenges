@@ -14,6 +14,8 @@ jobs:
             code: "lucetre/chap04/10026/main.cpp"
           - problem: 10152
             code: "lucetre/chap04/10152/main.cpp"
+          - problem: 100
+            code: "gracekim027/3n+1/src/test.java"
 
     runs-on: ubuntu-latest
     timeout-minutes: 1
