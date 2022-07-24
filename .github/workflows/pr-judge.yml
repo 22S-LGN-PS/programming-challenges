@@ -1,0 +1,46 @@
+name: (PR) Github Action Judge
+
+on:
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  judge:
+    strategy:
+      fail-fast: false
+      matrix:
+        set:
+          - problem: 10026
+            code: "lucetre/chap04/10026/main.cpp"
+          - problem: 10152
+            code: "lucetre/chap04/10152/main.cpp"
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Initialize Judge Result
+        uses: thollander/actions-comment-pull-request@v1
+        with:
+          message: |
+            |Problem|Source Code|Status|
+            |:------:|:---:|:---:|
+            |**${{ matrix.set.problem }}**|${{ matrix.set.code }}|:question:|
+          comment_includes: ${{ matrix.set.code }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Github Action Judge
+        run: sh .judge/submit.sh "${{ matrix.set.problem }}" "${{ matrix.set.code }}"
+
+      - name: Comment Judge Result
+        uses: thollander/actions-comment-pull-request@v1
+        with:
+          message: |
+            |Problem|Source Code|Status|
+            |:------:|:---:|:---:|
+            |**${{ matrix.set.problem }}**|${{ matrix.set.code }}|:+1:|
+          reactions: hooray
+          comment_includes: ${{ matrix.set.code }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
