@@ -63,3 +63,5 @@ Debug/
 *.sln
 *.vcxproj*
 *.tlog
+
+main
