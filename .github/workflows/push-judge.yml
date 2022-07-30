@@ -11,7 +11,7 @@ jobs:
       matrix:
         set:
           - problem: 10018
-            code: "nick11967\Ch 5\10018 Reverse and Add\reverseandadd.cpp"
+            code: "nick11967/Ch 5/10018 Reverse and Add/reverseandadd.cpp"
 
     runs-on: ubuntu-latest
     timeout-minutes: 1
