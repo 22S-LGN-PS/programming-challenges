@@ -10,11 +10,9 @@ jobs:
       fail-fast: false
       matrix:
         set:
-          - problem: 10026
-            code: "lucetre/chap04/10026/main.cpp"
-          - problem: 10152
-            code: "lucetre/chap04/10152/main.cpp"
-
+          - problem: 10018
+            code: "nick11967\Ch 5\10018 Reverse and Add\reverseandadd.cpp"
+            
     runs-on: ubuntu-latest
     timeout-minutes: 1
 
