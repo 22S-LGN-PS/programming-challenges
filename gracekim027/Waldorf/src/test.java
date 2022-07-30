@@ -99,6 +99,7 @@ class Case{
     }
 
     public Pair searchAccording(String word, Pair instruction, int times, int xPoint, int yPoint, Pair result){
+        //TODO: result 어디서 바꿈? --> 이게
 
         if (times == word.length()){
             return result;
@@ -109,6 +110,7 @@ class Case{
             //up 는 항상 (a-i, *) down 는 항상 (a+i, *)
             //diagonal 은 그냥 (x,y) 모두 합쳤을 떄의 결과물 (고려 X)
             if (Character.toLowerCase(word.charAt(times)) == Character.toLowerCase(charMatrix[xPoint][yPoint]) && xPoint < row && yPoint < column){
+                //TODO: 재귀를 하지 말고 for 문으로 바꾸기
                 result = searchAccording(word, instruction, times+1,
                         xPoint+instruction.getXPos(), yPoint+instruction.getYPos(), result);
             }else{
@@ -120,6 +122,7 @@ class Case{
 
 
 class Pair{
+        //TODO: Pair class 삭제하기
     int xPos;
     int yPos;
     Pair(int x, int y){
