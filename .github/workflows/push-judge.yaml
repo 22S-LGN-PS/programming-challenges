@@ -51,17 +51,8 @@ jobs:
         run: |
           items=$(echo '${{ env.SUBMITS }}' | jq -c -r '.[]')
 
-          # iterate through the Bash array
           for item in "${items[@]}"; do
             problem=$(jq '.problem' <<< "$item")
             code=$(jq '.code' <<< "$item")
-            echo $problem
-            echo $code
-            # do your stuff
+            echo 'Submit $problem $code'
           done
-
-          # SUBMITS=${{ env.SUBMITS }}
-          # echo $SUBMITS
-          # for item in ${SUBMITS[*]}; do
-          #   echo $item
-          # done
