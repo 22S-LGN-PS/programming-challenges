@@ -1,0 +1,31 @@
+name: build
+on: push
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.setmatrix.outputs.matrix }}
+    steps:
+      - name: checkout source code
+        uses: actions/checkout@v1
+      - id: setmatrix
+        run: |
+          matrixArray=$(find .judge/test -name '*.js')
+          # Start Generate Json String
+          echo "$matrixArray" | \
+          jq --slurp --raw-input 'split("\n")[:-1]' | \
+          jq  "{\"filepath\": .[] }" | \
+          jq -sc "{ \"include\": . }" > tmp
+          cat ./tmp
+          # End Generate Json String
+          matrixStringifiedObject=$(cat ./tmp) # Use this as jq @sh not working right
+          echo "::set-output name=matrix::$matrixStringifiedObject"
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{fromJson(needs.job1.outputs.matrix)}}
+    steps:
+      - name: checkout source code
+        uses: actions/checkout@v1
+      - run: echo ${{ matrix.filepath }}
