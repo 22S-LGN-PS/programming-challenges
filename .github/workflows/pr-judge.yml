@@ -12,6 +12,8 @@ jobs:
         set:
           - problem: 10018
             code: "nick11967/Ch 5/10018 Reverse and Add/reverseandadd.cpp"
+          - problem: 10018
+            code: "lucetre/chap05/10018/main.cpp"
 
     runs-on: ubuntu-latest
     timeout-minutes: 1
