@@ -50,7 +50,8 @@ jobs:
       - name: Github Action Judge
         run: |
           SUBMITS=${{ fromJson(env.SUBMITS) }}
+          echo $SUBMITS
           for submit in ${SUBMITS[@]}; do
-            echo "This is ${ submit }"
+            echo $submit
             # sh .judge/submit.sh "${{ submit.problem }}" "${{ submit.code }}"
           done
