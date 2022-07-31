@@ -31,12 +31,9 @@ int main()
         }
         for (int i = 0; i < n; i++)
         {
-            printf("%d", get<2>(work[i]));
-            if (i != n - 1)
-                printf(" ");
+            cout << get<2>(work[i]) << " ";
         }
-        if (c != 0)
-            printf("\n");
+        cout << endl;
     }
     return 0;
 }
