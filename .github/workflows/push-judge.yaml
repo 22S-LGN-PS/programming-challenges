@@ -51,10 +51,11 @@ jobs:
         run: |
 
           json=`cat ${{ matrix.filepath }}`
-          readarray -t my_array < <(jq -c '.[]' <<< $json)
+          items=$(echo "$json" | jq -c -r '.[]')
 
           # iterate through the Bash array
-          for item in "${my_array[@]}"; do
+          for item in "${items[@]}"; do
+            echo $item
             problem=$(jq '.problem' <<< "$item")
             code=$(jq '.code' <<< "$item")
             echo $problem
