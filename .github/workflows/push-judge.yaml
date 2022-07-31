@@ -34,7 +34,8 @@ jobs:
         run: |
           json=`cat ${{ matrix.filepath }}`
           echo $json
-          user=`echo $(jq -r '.submits' <<< "$json")`
+          submits=`echo $(jq -r '.submits' <<< "$json")`
+          echo $submits
       - run: |
           echo 'PACKAGE_JSON<<EOF' >> $GITHUB_ENV
           cat ${{ matrix.filepath }} >> $GITHUB_ENV
