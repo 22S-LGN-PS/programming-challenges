@@ -51,6 +51,6 @@ jobs:
         run: |
           SUBMITS=${{ fromJson(env.SUBMITS) }}
           echo $SUBMITS
-          for submit in ${SUBMITS[@]}; do
-            echo $submit
+          for item in ${SUBMITS[*]}; do
+            echo $item
           done
