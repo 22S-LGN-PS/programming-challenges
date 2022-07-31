@@ -36,6 +36,8 @@ jobs:
           echo $json
           user=`echo $(jq -r '.user' <<< "$json")`
       - run: |
+          echo 'PACKAGE_JSON<<EOF' >> $GITHUB_ENV
           echo $json >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
       - run: |
           echo '${{ fromJson(env.PACKAGE_JSON).user }}'

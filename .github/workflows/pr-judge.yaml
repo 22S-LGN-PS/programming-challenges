@@ -1,8 +1,8 @@
 name: (PR) Github Action Judge
 
-on:
-  pull_request:
-    branches: ["main"]
+# on:
+#   pull_request:
+#     branches: ["main"]
 
 jobs:
   judge:
