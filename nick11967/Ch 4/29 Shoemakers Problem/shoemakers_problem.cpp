@@ -33,7 +33,8 @@ int main()
         {
             printf("%d ", get<2>(work[i]));
         }
-        printf("\n");
+        if (c != 0)
+            printf("\n");
     }
     return 0;
 }
