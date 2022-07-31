@@ -34,10 +34,10 @@ jobs:
         run: |
           json=`cat ${{ matrix.filepath }}`
           echo $json
-          user=`echo $(jq -r '.user' <<< "$json")`
+          user=`echo $(jq -r '.submits' <<< "$json")`
       - run: |
           echo 'PACKAGE_JSON<<EOF' >> $GITHUB_ENV
-          echo $json >> $GITHUB_ENV
+          cat ${{ matrix.filepath }} >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
       - run: |
           echo '${{ fromJson(env.PACKAGE_JSON).user }}'
