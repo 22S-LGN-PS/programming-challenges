@@ -1,8 +1,8 @@
 name: (Push) nick11967
 
-on:
-  push:
-    branches: ["nick11967"]
+# on:
+#   push:
+#     branches: ["nick11967"]
 
 jobs:
   judge:
