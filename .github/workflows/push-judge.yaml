@@ -52,6 +52,7 @@ jobs:
           items=$(echo '${{ env.SUBMITS }}' | jq -c -r '.[]')
 
           for item in "${items[@]}"; do
+            echo $item
             problem=$(jq '.problem' <<< "$item")
             code=$(jq '.code' <<< "$item")
             sh .judge/submit.sh $problem $code

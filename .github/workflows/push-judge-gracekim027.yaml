@@ -1,8 +1,8 @@
 name: (Push) gracekim027
 
-# on:
-#   push:
-#     branches: ["gracekim027"]
+on:
+  push:
+    branches: ["gracekim027"]
 
 jobs:
   judge:

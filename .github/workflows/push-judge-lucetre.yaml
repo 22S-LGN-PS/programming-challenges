@@ -1,8 +1,8 @@
 name: (Push) lucetre
 
-# on:
-#   push:
-#     branches: ["lucetre"]
+on:
+  push:
+    branches: ["lucetre"]
 
 jobs:
   judge:
