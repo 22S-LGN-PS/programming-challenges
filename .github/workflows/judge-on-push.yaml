@@ -1,0 +1,59 @@
+name: (Push) Github Action Judge
+
+on:
+  push:
+    branches: ["**"]
+
+jobs:
+  set-job-matrix:
+    runs-on: ubuntu-latest
+
+    outputs:
+      matrix: ${{ steps.setmatrix.outputs.matrix }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - id: setmatrix
+        name: Configure judge
+        run: |
+          matrixArray=$(find .judge/user -name '*.json')
+          echo "$matrixArray" | \
+          jq --slurp --raw-input 'split("\n")[:-1]' | \
+          jq  "{\"filepath\": .[] }" | \
+          jq -sc "{ \"include\": . }" > tmp
+          cat ./tmp
+          matrixStringifiedObject=$(cat ./tmp)
+          echo "::set-output name=matrix::$matrixStringifiedObject"
+
+  run:
+    needs: set-job-matrix
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix: ${{fromJson(needs.set-job-matrix.outputs.matrix)}}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up judge config via ${{ matrix.filepath }}
+        run: |
+          json=`cat ${{ matrix.filepath }}`
+          echo "SUBMITS=`echo $(jq -r '.submits' <<< "$json")`" >> $GITHUB_ENV
+          echo "USER=`echo $(jq -r '.user' <<< "$json")`" >> $GITHUB_ENV
+
+      - name: Display submission info
+        run: |
+          echo 'USER: ${{ env.USER }}'
+          echo 'SUBMITS: ${{ env.SUBMITS }}'
+
+      - name: Github Action Judge
+        run: |
+          items=$(echo '${{ env.SUBMITS }}' | jq -c -r '.[]')
+
+          for item in "${items[@]}"; do
+            echo $item
+            problem=$(jq '.problem' <<< "$item")
+            code=$(jq '.code' <<< "$item")
+            sh .judge/submit.sh $problem $code
+          done
