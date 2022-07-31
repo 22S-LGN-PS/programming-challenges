@@ -49,7 +49,7 @@ jobs:
 
       - name: Github Action Judge
         run: |
-          items=$(echo ${{ env.SUBMITS }} | jq -c -r '.[]')
+          items=$(echo "${{ env.SUBMITS }}" | jq -c -r '.[]')
 
           # iterate through the Bash array
           for item in "${items[@]}"; do
