@@ -51,7 +51,7 @@ jobs:
         run: |
           SUBMITS=${{ fromJson(env.SUBMITS) }}
           echo $SUBMITS
-          for submit in ${SUBMITS[@]}; do
-            echo $submit
-            # sh .judge/submit.sh "${{ submit.problem }}" "${{ submit.code }}"
-          done
+          # for submit in ${SUBMITS[@]}; do
+          #   echo $submit
+          #   # sh .judge/submit.sh "${{ submit.problem }}" "${{ submit.code }}"
+          # done
