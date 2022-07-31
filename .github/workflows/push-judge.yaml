@@ -7,10 +7,13 @@ on:
 jobs:
   set-job-matrix:
     runs-on: ubuntu-latest
+
     outputs:
       matrix: ${{ steps.setmatrix.outputs.matrix }}
+
     steps:
       - uses: actions/checkout@v3
+
       - id: setmatrix
         name: Configure judge
         run: |
@@ -26,8 +29,10 @@ jobs:
   run:
     needs: set-job-matrix
     runs-on: ubuntu-latest
+
     strategy:
       matrix: ${{fromJson(needs.set-job-matrix.outputs.matrix)}}
+
     steps:
       - uses: actions/checkout@v3
 
@@ -43,8 +48,9 @@ jobs:
           echo 'SUBMITS: ${{ env.SUBMITS }}'
 
       - name: Github Action Judge
+        run: |
           SUBMITS=${{ fromJson(env.SUBMITS) }}
           for submit in ${SUBMITS[@]}; do
-          echo "This is ${ submit.problem } ${ submit.code }"
-          sh .judge/submit.sh "${{ submit.problem }}" "${{ submit.code }}"
+            echo "This is ${ submit.problem } ${ submit.code }"
+            sh .judge/submit.sh "${{ submit.problem }}" "${{ submit.code }}"
           done
