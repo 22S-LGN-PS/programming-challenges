@@ -37,6 +37,8 @@ jobs:
           echo "USER=`echo $(jq -r '.user' <<< "$json")`" >> $GITHUB_ENV
       - name: Display submission info
         run: |
-          echo '${{ env.USER }}'
-          echo '${{ env.SUBMITS }}'
-          echo '${{ fromJson(env.SUBMITS) }}'
+          echo 'USER: ${{ env.USER }}'
+          echo 'SUBMITS: ${{ env.SUBMITS }}'
+          for submit in ${ fromJson(env.SUBMITS) }; do
+            echo "This is ${submit.problem} ${submit.code}"
+          done
