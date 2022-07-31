@@ -30,15 +30,13 @@ jobs:
       matrix: ${{fromJson(needs.set-job-matrix.outputs.matrix)}}
     steps:
       - uses: actions/checkout@v3
-      - name: Github Action Judge ${{ matrix.filepath }}
+      - name: Set up judge config via ${{ matrix.filepath }}
         run: |
           json=`cat ${{ matrix.filepath }}`
-          echo $json
-          user=`echo $(jq -r '.user' <<< "$json")`
-          submits=`echo $(jq -r '.submits' <<< "$json")`
           echo "SUBMITS=`echo $(jq -r '.submits' <<< "$json")`" >> $GITHUB_ENV
-          echo "USER=`echo $(jq -r '.submits' <<< "$user")`" >> $GITHUB_ENV
-      - run: |
+          echo "USER=`echo $(jq -r '.user' <<< "$json")`" >> $GITHUB_ENV
+      - name: Display submission info
+        run: |
           echo '${{ env.USER }}'
           echo '${{ env.SUBMITS }}'
-          echo '${{ fromJson(env.SUBMITS).user }}'
+          echo '${{ fromJson(env.SUBMITS) }}'
