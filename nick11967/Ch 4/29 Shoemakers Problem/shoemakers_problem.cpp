@@ -21,9 +21,9 @@ int main()
         }
         for (int i = 0; i < n - 1; i++)
         {
-            for (int j = i + 1; j < n; j++)
+            for (int j = 0; j + i < n - 1; j++)
             {
-                if (get<1>(work[i]) * get<0>(work[j]) < get<1>(work[j]) * get<0>(work[i]))
+                if (get<1>(work[j]) * get<0>(work[j + 1]) < get<1>(work[j + 1]) * get<0>(work[j]))
                 {
                     swap(work[i], work[j]);
                 }
