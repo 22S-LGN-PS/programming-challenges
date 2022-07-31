@@ -25,7 +25,7 @@ int main()
             {
                 if (get<1>(work[j]) * get<0>(work[j + 1]) < get<1>(work[j + 1]) * get<0>(work[j]))
                 {
-                    swap(work[i], work[j]);
+                    swap(work[j], work[j + 1]);
                 }
             }
         }
