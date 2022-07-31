@@ -49,7 +49,7 @@ jobs:
 
       - name: Github Action Judge
         run: |
-          SUBMITS=${{ fromJson(env.SUBMITS) }}
+          SUBMITS=${{ env.SUBMITS }}
           echo $SUBMITS
           for item in ${SUBMITS[*]}; do
             echo $item
