@@ -17,7 +17,7 @@ public class test {
                 taskMap.put(j, task);
             }
 
-            sb.append(command(taskMap));
+            sb.append(command(taskMap)).append("\n");
         }
 
         System.out.println(sb.toString().trim());
