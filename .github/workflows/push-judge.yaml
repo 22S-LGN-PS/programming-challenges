@@ -54,5 +54,5 @@ jobs:
           for item in "${items[@]}"; do
             problem=$(jq '.problem' <<< "$item")
             code=$(jq '.code' <<< "$item")
-            echo 'Submit $problem $code'
+            sh .judge/submit.sh "${{ problem }}" "${{ code }}"
           done
