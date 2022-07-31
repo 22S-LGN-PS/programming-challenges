@@ -35,5 +35,7 @@ jobs:
           json=`cat ${{ matrix.filepath }}`
           echo $json
           user=`echo $(jq -r '.user' <<< "$json")`
-      # - run: |
-      #     echo '${{ fromJson(env.USER_JSON).user }}'
+      - run: |
+          echo $json >> $GITHUB_ENV
+      - run: |
+          echo '${{ fromJson(env.PACKAGE_JSON).user }}'
