@@ -10,10 +10,11 @@ jobs:
       fail-fast: false
       matrix:
         set:
-          - problem: 10018
-            code: "nick11967/Ch 5/10018 Reverse and Add/reverseandadd.cpp"
           - problem: 10026
-            code: "nick11967/Ch 4/29 Shoemakers Problem/shoemakers_problem.cpp"
+            code: "gracekim027/ShoeMaker'sProblem/src/test.java"
+          - problem: 10018
+            code: "gracekim027/ReverseandAdd/src/test.java"
+
 
     runs-on: ubuntu-latest
     timeout-minutes: 1

@@ -1,5 +1,3 @@
-import javafx.util.Pair;
-
 import java.util.*;
 
 public class test {
@@ -19,7 +17,7 @@ public class test {
                 taskMap.put(j, task);
             }
 
-            sb.append(command(taskMap));
+            sb.append(command(taskMap)).append("\n");
         }
 
         System.out.println(sb.toString().trim());
@@ -28,14 +26,15 @@ public class test {
     }
 
     public static String command(HashMap<Integer, orderedPair> taskMap){
-        for(int x=1; x<taskMap.size(); x++){
-            for(int y=0; y<taskMap.size()-x;y++){
-                if(taskMap.get(y).getDays()*taskMap.get(y+1).getFine() > taskMap.get(y+1).getNum()*taskMap.get(y).getFine()){
+        for(int x=0; x<taskMap.size()-1; x++){
+            for(int y=0; y<taskMap.size()-x-1;y++){
+                if(taskMap.get(y).getDays()*taskMap.get(y+1).getFine() > taskMap.get(y+1).getDays()*taskMap.get(y).getFine()){
                     orderedPair tmp = taskMap.get(y);
                     taskMap.replace(y, taskMap.get(y+1));
                     taskMap.replace(y+1, tmp);
                 }
             }
+
         }
 
         StringBuilder sb = new StringBuilder();
