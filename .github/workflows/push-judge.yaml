@@ -39,7 +39,8 @@ jobs:
         run: |
           echo 'USER: ${{ env.USER }}'
           echo 'SUBMITS: ${{ env.SUBMITS }}'
-          submits=fromJson(env.SUBMITS)
-          for submit in ${ submits[@] }; do
+          SUBMITS=fromJson(env.SUBMITS)
+
+          for submit in ${SUBMITS[@]}; do
             echo "This is ${submit.problem} ${submit.code}"
           done
