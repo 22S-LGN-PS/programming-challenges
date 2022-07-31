@@ -1,8 +1,8 @@
-name: (Push) Github Action Judge
+name: (Push) gracekim027
 
 on:
   push:
-    branches: ["**"]
+    branches: ["gracekim027"]
 
 jobs:
   judge:

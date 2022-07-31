@@ -30,4 +30,5 @@ jobs:
       matrix: ${{fromJson(needs.set-job-matrix.outputs.matrix)}}
     steps:
       - uses: actions/checkout@v3
-      - run: echo ${{ matrix.filepath }}
+      - name: Github Action Judge ${{ matrix.filepath }}
+        run: echo ${{ fromJson(matrix.filepath) }}

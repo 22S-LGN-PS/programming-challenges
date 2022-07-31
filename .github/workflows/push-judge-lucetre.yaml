@@ -1,4 +1,4 @@
-name: (Push) Github Action Judge - lucetre
+name: (Push) lucetre
 
 on:
   push:
