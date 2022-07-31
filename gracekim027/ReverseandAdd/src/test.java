@@ -13,25 +13,29 @@ public class test {
         System.exit(0);
     }
 
-    public static String command(int num){
-
-        //step 1: get reverse int of current num
-        //step 2: make addition in int form
-        //step 3: send the added int in array form to isPalin
-        //step 4: repeat until isPalin is true, save the result int
+    public static String command(long num){
         int times = 0;
 
-        while (!isPalin(String.valueOf(num).toCharArray())){
+        do{
             int length = String.valueOf(num).length();
             StringBuilder sb = new StringBuilder();
+
+            //get reverse int of current num
             for (int i=0; i<length; i++){
                 sb.append(String.valueOf(num).charAt(length-1-i));
             }
-            num = Integer.parseInt(sb.toString()) + num;
+
+            //make addition in long form
+            num = Long.parseLong(sb.toString()) + num;
+
             times = times + 1;
-        }
+
+            //send the added long in array form to isPalin
+            //repeat until isPalin is true, save the result long
+        }while(!isPalin(String.valueOf(num).toCharArray()));
 
         return times + " " + num;
+
     }
 
     public static boolean isPalin(char[] numArray){
