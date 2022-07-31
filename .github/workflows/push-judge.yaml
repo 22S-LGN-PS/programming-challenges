@@ -31,10 +31,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Github Action Judge ${{ matrix.filepath }}
-        run: cat ${{ matrix.filepath }}
-      - run: |
-          echo 'USER_JSON<<EOF' >> $GITHUB_ENV
-          cat ${{ matrix.filepath }} >> $GITHUB_ENV
-          echo 'EOF' >> $GITHUB_ENV
-      - run: |
-          echo '${{ fromJson(env.USER_JSON).user }}'
+        run: |
+          json=`cat ${{ matrix.filepath }}`
+          echo $json
+          user=`echo $(jq -r '.user' <<< "$json")`
+      # - run: |
+      #     echo '${{ fromJson(env.USER_JSON).user }}'
