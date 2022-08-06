@@ -27,11 +27,11 @@ jobs:
           echo "::set-output name=matrix::$matrixStringifiedObject"
 
   submit-judge:
-    needs: set-job-matrix
+    needs: set-up-judge
     runs-on: ubuntu-latest
 
     strategy:
-      matrix: ${{fromJson(needs.set-job-matrix.outputs.matrix)}}
+      matrix: ${{fromJson(needs.set-up-judge.outputs.matrix)}}
 
     steps:
       - uses: actions/checkout@v3
