@@ -73,6 +73,7 @@ jobs:
 
   run-judge:
     name: Run Judge
+    if: always()
     needs: submit-judge
     runs-on: ubuntu-latest
 
