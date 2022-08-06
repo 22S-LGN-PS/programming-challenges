@@ -66,6 +66,11 @@ jobs:
           echo 'USER: ${{ env.USER }}'
           echo 'SUBMIT_JSON: ${{ env.SUBMIT_JSON }}'
 
+      - name: Fetch submission
+        uses: actions/download-artifact@v3
+        with:
+          name: submission
+
       - name: Submit to judge
         id: submitjudge
         run: |
@@ -81,14 +86,8 @@ jobs:
           MATRIX=$(jq -c "{ \"include\": . }" <<<$SUBMIT_JSON)
           echo "::set-output name=matrix::$MATRIX"
 
-      - name: Fetch submission
-        uses: actions/download-artifact@v3
-        with:
-          name: submission
-
       - shell: bash
         run: |
-          value=`cat submission.yaml`
           echo hello >> submission.yaml
 
       - name: Update submission
@@ -97,9 +96,24 @@ jobs:
           name: submission
           path: submission.yaml
 
+  gather-submission:
+    name: Gather submission
+    needs: submit-judge
+    runs-on: self-hosted
+
+    steps:
+      - name: Fetch submission
+        uses: actions/download-artifact@v3
+        with:
+          name: submission
+
+      - shell: bash
+        run: |
+          cat submission.yaml
+
   run-judge:
     name: Run Judge
-    needs: submit-judge
+    needs: gather-submission
     runs-on: ubuntu-latest
 
     strategy:
