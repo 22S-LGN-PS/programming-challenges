@@ -80,7 +80,8 @@ jobs:
       - name: Add a new submission
         shell: bash
         run: |
-          SUBMIT_JSON=$(cat submission.json | jq '.[]')
+          SUBMISSION=$(cat submission.json | jq '.[]')
+          readarray -t SUBMITS < <(jq -c '.[]' <<<${{ env.SUBMIT_JSON }})
 
           for submit in "${SUBMITS[@]}"; do
             PROBLEM=$(jq '.problem' <<<"$submit")
@@ -90,11 +91,11 @@ jobs:
               --arg problem $PROBLEM \
               --arg code $CODE \
               '.user = $user | .problem = $problem | .code = $code')
-            SUBMIT_JSON=$(echo $SUBMIT_JSON $SUBMIT | jq -s '.[]')
+            SUBMISSION=$(echo $SUBMISSION $SUBMIT | jq -s '.[]')
           done
 
-          echo $SUBMIT_JSON | jq
-          echo $SUBMIT_JSON | jq > submission.json
+          echo $SUBMISSION | jq
+          echo $SUBMISSION | jq > submission.json
 
       - name: Update submission
         uses: actions/upload-artifact@v3
