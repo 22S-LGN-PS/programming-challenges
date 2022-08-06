@@ -74,15 +74,6 @@ jobs:
       - name: Submit to judge
         id: submitjudge
         run: |
-          readarray -t SUBMITS < <(jq -c '.[]' <<<'${{ env.SUBMIT_JSON }}')
-
-          for submit in "${SUBMITS[@]}"; do
-            PROBLEM=$(jq '.problem' <<<"$submit")
-            CODE=$(jq '.code' <<<"$submit")
-            echo $PROBLEM
-            echo $CODE
-          done
-
           MATRIX=$(jq -c "{ \"include\": . }" <<<$SUBMIT_JSON)
           echo "::set-output name=matrix::$MATRIX"
 
@@ -102,6 +93,7 @@ jobs:
             SUBMIT_JSON=$(echo $SUBMIT_JSON $SUBMIT | jq -s '.[]')
           done
 
+          echo $SUBMIT_JSON
           echo $SUBMIT_JSON > submission.json
 
       - name: Update submission
