@@ -28,6 +28,15 @@ jobs:
           matrixStringifiedObject=$(cat ./users)
           echo "::set-output name=matrix::$matrixStringifiedObject"
 
+      - name: Create an empty submission
+        run: touch submission.yaml
+
+      - name: Upload submission
+        uses: actions/upload-artifact@v3
+        with:
+          name: submission
+          path: submission.yaml
+
   submit-judge:
     name: Submit to Judge
     needs: set-up-judge
@@ -37,6 +46,7 @@ jobs:
       matrix: ${{fromJson(needs.set-up-judge.outputs.matrix)}}
 
     outputs:
+      max-parallel: 1
       matrix: ${{ steps.submitjudge.outputs.matrix }}
 
     steps:
@@ -71,9 +81,24 @@ jobs:
           MATRIX=$(jq -c "{ \"include\": . }" <<<$SUBMIT_JSON)
           echo "::set-output name=matrix::$MATRIX"
 
+      - name: Fetch submission
+        uses: actions/download-artifact@v3
+        with:
+          name: submission
+
+      - shell: bash
+        run: |
+          value=`cat submission.yaml`
+          echo hello >> submission.yaml
+
+      - name: Update submission
+        uses: actions/upload-artifact@v3
+        with:
+          name: submission
+          path: submission.yaml
+
   run-judge:
     name: Run Judge
-    if: always()
     needs: submit-judge
     runs-on: ubuntu-latest
 
