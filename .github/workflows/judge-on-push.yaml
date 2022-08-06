@@ -97,9 +97,9 @@ jobs:
           path: submission.yaml
 
   gather-submission:
-    name: Gather submission
+    name: Gather submissions
     needs: submit-judge
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - name: Fetch submission
