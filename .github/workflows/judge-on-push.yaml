@@ -94,7 +94,7 @@ jobs:
           done
 
           echo $SUBMIT_JSON
-          echo $SUBMIT_JSON > submission.json
+          echo '$SUBMIT_JSON' > submission.json
 
       - name: Update submission
         uses: actions/upload-artifact@v3
