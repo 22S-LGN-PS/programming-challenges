@@ -86,7 +86,8 @@ jobs:
           MATRIX=$(jq -c "{ \"include\": . }" <<<$SUBMIT_JSON)
           echo "::set-output name=matrix::$MATRIX"
 
-      - shell: bash
+      - name: Add a new submission
+        shell: bash
         run: |
           SUBMIT_JSON=$(cat submission.json | jq '.[]')
 
@@ -101,7 +102,7 @@ jobs:
             SUBMIT_JSON=$(echo $SUBMIT_JSON $SUBMIT | jq -s '.[]')
           done
 
-          echo $SUBMIT_JSON | jq -s '.'
+          echo $SUBMIT_JSON > submission.json
 
       - name: Update submission
         uses: actions/upload-artifact@v3
