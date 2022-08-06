@@ -29,13 +29,13 @@ jobs:
           echo "::set-output name=matrix::$matrixStringifiedObject"
 
       - name: Create an empty submission
-        run: touch submission.yaml
+        run: echo [] > submission.json
 
       - name: Upload submission
         uses: actions/upload-artifact@v3
         with:
           name: submission
-          path: submission.yaml
+          path: submission.json
 
   submit-judge:
     name: Submit to Judge
@@ -88,13 +88,26 @@ jobs:
 
       - shell: bash
         run: |
-          echo hello >> submission.yaml
+          SUBMIT_JSON=$(cat submission.json | jq '.[]')
+
+          for submit in "${SUBMITS[@]}"; do
+            PROBLEM=$(jq '.problem' <<<"$submit")
+            CODE=$(jq '.code' <<<"$submit")
+            SUBMIT=$(jq -n \
+              --arg user $USER \
+              --arg problem $PROBLEM \
+              --arg code $CODE \
+              '.user = $user | .problem = $problem | .code = $code')
+            SUBMIT_JSON=$(echo $SUBMIT_JSON $SUBMIT | jq -s '.[]')
+          done
+
+          echo $SUBMIT_JSON | jq -s '.'
 
       - name: Update submission
         uses: actions/upload-artifact@v3
         with:
           name: submission
-          path: submission.yaml
+          path: submission.json
 
   gather-submission:
     name: Gather submissions
@@ -109,7 +122,7 @@ jobs:
 
       - shell: bash
         run: |
-          cat submission.yaml
+          cat submission.json
 
   run-judge:
     name: Run Judge
