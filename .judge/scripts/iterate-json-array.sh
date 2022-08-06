@@ -9,4 +9,4 @@ for submit in "${SUBMITS[@]}"; do
   echo $CODE
 done
 
-jq -sc "{ \"include\": . }" <<<$JSON
+jq -c "{ \"include\": . }" <<<$JSON

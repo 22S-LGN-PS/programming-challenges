@@ -62,7 +62,7 @@ jobs:
             echo $CODE
           done
 
-          MATRIX=$(jq -sc "{ \"include\": . }" <<<$SUBMIT_JSON)
+          MATRIX=$(jq -c "{ \"include\": . }" <<<$SUBMIT_JSON)
           echo "::set-output name=matrix::$MATRIX"
 
   run-judge:
