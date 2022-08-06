@@ -94,8 +94,8 @@ jobs:
             SUBMISSION=$(echo $SUBMISSION $SUBMIT | jq -s '.[]')
           done
 
-          echo $SUBMISSION | jq
-          echo $SUBMISSION | jq > submission.json
+          echo $SUBMISSION | jq -s '.'
+          echo $SUBMISSION | jq -s '.' > submission.json
 
       - name: Update submission
         uses: actions/upload-artifact@v3
