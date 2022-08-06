@@ -15,20 +15,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: yq - portable yaml processor
-        uses: mikefarah/yq@v4.27.2
-
       - id: setmatrix
         name: Configure judge
         run: |
-          yq
-          matrixArray=$(find .judge/user -name '*.json')
-          echo "$matrixArray" | \
-          jq --slurp --raw-input 'split("\n")[:-1]' | \
-          jq  "{\"filepath\": .[] }" | \
-          jq -sc "{ \"include\": . }" > tmp
-          cat ./tmp
-          matrixStringifiedObject=$(cat ./tmp)
+          USERS=$(find .judge/users -name '*.yaml')
+          echo "$USERS" |
+              jq --slurp --raw-input 'split("\n")[:-1]' |
+              jq "{\"filepath\": .[] }" |
+              jq -sc "{ \"include\": . }" >users
+          cat ./users
+
+          matrixStringifiedObject=$(cat ./users)
           echo "::set-output name=matrix::$matrixStringifiedObject"
 
   submit-judge:
@@ -45,9 +42,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Install yq
+        uses: mikefarah/yq@v4.27.2
+
       - name: Set up judge config via ${{ matrix.filepath }}
         run: |
-          json=`cat ${{ matrix.filepath }}`
+          json=`cat ${{ matrix.filepath }} | yq e -o=json`
           echo "SUBMIT_JSON=`echo $(jq -r '.submits' <<< "$json")`" >> $GITHUB_ENV
           echo "USER=`echo $(jq -r '.user' <<< "$json")`" >> $GITHUB_ENV
 
