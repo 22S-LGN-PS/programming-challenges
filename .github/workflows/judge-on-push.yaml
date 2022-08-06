@@ -81,7 +81,7 @@ jobs:
         shell: bash
         run: |
           SUBMISSION=$(cat submission.json | jq '.[]')
-          readarray -t SUBMITS < <(jq -c '.[]' <<<${{ env.SUBMIT_JSON }})
+          readarray -t SUBMITS < <(jq -c '.[]' <<<'${{ env.SUBMIT_JSON }}')
 
           for submit in "${SUBMITS[@]}"; do
             PROBLEM=$(jq '.problem' <<<"$submit")
