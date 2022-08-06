@@ -5,7 +5,7 @@ on:
     branches: ["**"]
 
 jobs:
-  set-job-matrix:
+  set-up-judge:
     runs-on: ubuntu-latest
 
     outputs:
@@ -26,7 +26,7 @@ jobs:
           matrixStringifiedObject=$(cat ./tmp)
           echo "::set-output name=matrix::$matrixStringifiedObject"
 
-  run:
+  submit-judge:
     needs: set-job-matrix
     runs-on: ubuntu-latest
 
@@ -47,13 +47,14 @@ jobs:
           echo 'USER: ${{ env.USER }}'
           echo 'SUBMITS: ${{ env.SUBMITS }}'
 
-      - name: Github Action Judge
+      - name: Github action judge
         run: |
-          items=$(echo '${{ env.SUBMITS }}' | jq -c -r '.[]')
+          readarray -t SUBMITS < <(jq -c '.[]' <<<'${{ env.SUBMITS }}')
 
-          for item in "${items[@]}"; do
-            echo $item
-            problem=$(jq '.problem' <<< "$item")
-            code=$(jq '.code' <<< "$item")
-            sh .judge/submit.sh $problem $code
+          for submit in "${SUBMITS[@]}"; do
+            PROBLEM=$(jq '.problem' <<<"$submit")
+            CODE=$(jq '.code' <<<"$submit")
+            echo $PROBLEM
+            echo $CODE
+            sh .judge/submit.sh $PROBLEM $CODE
           done
