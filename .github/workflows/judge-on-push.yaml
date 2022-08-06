@@ -86,15 +86,15 @@ jobs:
             PROBLEM=$(jq '.problem' <<<"$submit")
             CODE=$(jq '.code' <<<"$submit")
             SUBMIT=$(jq -n \
-              --arg user $USER \
+              --arg user ${{ env.USER }} \
               --arg problem $PROBLEM \
               --arg code $CODE \
               '.user = $user | .problem = $problem | .code = $code')
             SUBMIT_JSON=$(echo $SUBMIT_JSON $SUBMIT | jq -s '.[]')
           done
 
-          echo $SUBMIT_JSON
-          echo '$SUBMIT_JSON' > submission.json
+          echo $SUBMIT_JSON | jq
+          echo $SUBMIT_JSON | jq > submission.json
 
       - name: Update submission
         uses: actions/upload-artifact@v3
