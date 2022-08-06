@@ -6,6 +6,7 @@ on:
 
 jobs:
   set-up-judge:
+    name: Set-up
     runs-on: ubuntu-latest
 
     outputs:
@@ -14,9 +15,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: yq - portable yaml processor
+        uses: mikefarah/yq@v4.27.2
+
       - id: setmatrix
         name: Configure judge
         run: |
+          yq
           matrixArray=$(find .judge/user -name '*.json')
           echo "$matrixArray" | \
           jq --slurp --raw-input 'split("\n")[:-1]' | \
@@ -27,6 +32,7 @@ jobs:
           echo "::set-output name=matrix::$matrixStringifiedObject"
 
   submit-judge:
+    name: Submit
     needs: set-up-judge
     runs-on: ubuntu-latest
 
@@ -66,6 +72,7 @@ jobs:
           echo "::set-output name=matrix::$MATRIX"
 
   run-judge:
+    name: Run
     needs: submit-judge
     runs-on: ubuntu-latest
 
