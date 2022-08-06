@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/gracekim027/3n+1/3n+1.iml" filepath="$PROJECT_DIR$/gracekim027/3n+1/3n+1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gracekim027/CommonPermutation/CommonPermutation.iml" filepath="$PROJECT_DIR$/gracekim027/CommonPermutation/CommonPermutation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gracekim027/JollyJumper/JollyJumper.iml" filepath="$PROJECT_DIR$/gracekim027/JollyJumper/JollyJumper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gracekim027/ShellSort/ShellSort.iml" filepath="$PROJECT_DIR$/gracekim027/ShellSort/ShellSort.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gracekim027/ShoeMaker'sProblem/ShoeMaker'sProblem.iml" filepath="$PROJECT_DIR$/gracekim027/ShoeMaker'sProblem/ShoeMaker'sProblem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gracekim027/Waldorf/Waldorf.iml" filepath="$PROJECT_DIR$/gracekim027/Waldorf/Waldorf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gracekim027/Yahtzee/Yahtzee.iml" filepath="$PROJECT_DIR$/gracekim027/Yahtzee/Yahtzee.iml" />
+    </modules>
+  </component>
+</project>

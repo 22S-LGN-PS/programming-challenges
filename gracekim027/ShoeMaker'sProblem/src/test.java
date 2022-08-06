@@ -1,53 +1,64 @@
-import javafx.util.Pair;
-
 import java.util.*;
-
-//QUESTION: 순서를 어떻게 보존하지..?
-
 
 public class test {
     public static void main(String args[]) {
-        //structure with key value and order??
+
         Scanner sc = new Scanner(System.in);
         StringBuilder sb = new StringBuilder();
+
         int cases = sc.nextInt();
         for (int i = 0; i < cases; i++) {
-            int tasks = sc.nextInt();
-            HashMap<Integer, Pair> taskMap = new LinkedHashMap<>();
-            ArrayList<Pair> taskList = new ArrayList<>();
 
-            for (int j=0; j< tasks; j++){
-                Pair task = new Pair<>(sc.nextInt(), sc.nextInt());
+            int tasks = sc.nextInt();
+            HashMap<Integer, orderedPair> taskMap = new HashMap<>();
+
+            for (int j=0; j<tasks; j++){
+                orderedPair task = new orderedPair(j+1, sc.nextInt(), sc.nextInt());
                 taskMap.put(j, task);
-                taskList.add(task);
             }
 
-            sb.append(command(taskMap, taskList));
+            sb.append(command(taskMap)).append("\n");
         }
 
         System.out.println(sb.toString().trim());
         System.exit(0);
+
     }
 
-    public static String command(HashMap<Integer, Pair> taskMap, ArrayList<Pair> taskList){
-        //taskMap 의 key 는 i, value 는 <num of days, fine per day>
-        for(int x=1; x<taskMap.size(); x++){
-            for(int y=0; y<taskMap.size()-x;y++){
-                if((int)taskMap.get(y).getKey()*(int)taskMap.get(y+1).getValue() > (int)taskMap.get(y+1).getKey()* (int)taskMap.get(y).getValue()){
-                    Pair tmp = taskMap.get(y);
-                    System.out.println("replaced");
+    public static String command(HashMap<Integer, orderedPair> taskMap){
+        for(int x=0; x<taskMap.size()-1; x++){
+            for(int y=0; y<taskMap.size()-x-1;y++){
+                if(taskMap.get(y).getDays()*taskMap.get(y+1).getFine() > taskMap.get(y+1).getDays()*taskMap.get(y).getFine()){
+                    orderedPair tmp = taskMap.get(y);
                     taskMap.replace(y, taskMap.get(y+1));
                     taskMap.replace(y+1, tmp);
                 }
             }
+
         }
 
         StringBuilder sb = new StringBuilder();
-        ArrayList<Integer> keySet = new ArrayList<>(taskMap.keySet());
+
         for(int i=0; i<taskMap.size(); i++){
-            sb.append(keySet.get(i) +1).append(" ");
+            sb.append(taskMap.get(i).getNum()).append(" ");
         }
         return sb.toString();
     }
+}
+
+class orderedPair{
+    int taskNum;
+    int numDays;
+    int fine;
+
+    public orderedPair(int taskNum, int numDays, int fine){
+        this.taskNum = taskNum;
+        this.numDays = numDays;
+        this.fine = fine;
+    }
+
+    public int getNum(){return taskNum;}
+    public int getDays(){return numDays;}
+    public int getFine(){return fine;}
 }
 
