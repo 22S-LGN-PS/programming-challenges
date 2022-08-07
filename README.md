@@ -1,5 +1,7 @@
 # Programming Challenges
 
+[![Github Action Judge](https://github.com/22S-LGN-PS/programming-challenges/actions/workflows/judge-on-push.yaml/badge.svg)](https://github.com/22S-LGN-PS/programming-challenges/actions/workflows/judge-on-push.yaml)
+
 ##### 2022 Summer Programming Challenges Study
 
 ### Book
