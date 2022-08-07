@@ -1,4 +1,4 @@
-name: PUSH - Github Action Judge
+name: Github Action Judge
 
 on:
   push:
