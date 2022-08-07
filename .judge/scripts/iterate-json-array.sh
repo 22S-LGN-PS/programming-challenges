@@ -16,8 +16,9 @@ for submit in "${SUBMITS[@]}"; do
   SUBMIT_JSON=$(echo $SUBMIT_JSON $SUBMIT | jq -s '.[]')
 done
 
+echo $SUBMIT_JSON
 echo $SUBMIT_JSON | jq -s '.'
 
-jq -c "{ \"include\": . }" <<<$JSON
+# jq -c "{ \"include\": . }" <<<$JSON
 
-echo '[{"1":"1"}]' | jq '.[]'
+# echo '[{"1":"1"}]' | jq '.[]'
