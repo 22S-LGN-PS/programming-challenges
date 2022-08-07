@@ -110,7 +110,7 @@ jobs:
         id: gather-submission
         run: |
           cat submission.json
-          cat submission.json | jq -sc "{ \"include\": .[] }" >submission
+          cat submission.json | jq -sc "{ \"set\": .[] }" >submission
           cat ./submission
           echo "::set-output name=matrix::$(cat ./submission)"
 
@@ -118,7 +118,7 @@ jobs:
     needs: gather-submission
     strategy:
       fail-fast: false
-      matrix: ${{fromJson(needs.gather-judge.outputs.matrix)}}
+      matrix: ${{fromJson(needs.gather-submission.outputs.matrix)}}
 
     runs-on: ubuntu-latest
     timeout-minutes: 1
