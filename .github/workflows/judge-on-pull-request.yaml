@@ -1,9 +1,8 @@
-name: (PR) Github Action Judge
+name: PR - Github Action Judge
 
 on:
   pull_request:
     branches: ["main"]
-
 jobs:
   judge:
     strategy:
@@ -27,6 +26,7 @@ jobs:
         uses: thollander/actions-comment-pull-request@v1
         with:
           message: |
+            [![PR - Github Action Judge](https://github.com/22S-LGN-PS/programming-challenges/actions/workflows/judge-on-pull-request.yaml/badge.svg)](https://github.com/22S-LGN-PS/programming-challenges/actions/workflows/judge-on-pull-request.yaml)
             |Problem|Source Code|Status|
             |:------:|:---:|:---:|
             |**${{ matrix.set.problem }}**|${{ matrix.set.code }}|:question:|
@@ -40,6 +40,7 @@ jobs:
         uses: thollander/actions-comment-pull-request@v1
         with:
           message: |
+            [![PR - Github Action Judge](https://github.com/22S-LGN-PS/programming-challenges/actions/workflows/judge-on-pull-request.yaml/badge.svg)](https://github.com/22S-LGN-PS/programming-challenges/actions/workflows/judge-on-pull-request.yaml)
             |Problem|Source Code|Status|
             |:------:|:---:|:---:|
             |**${{ matrix.set.problem }}**|${{ matrix.set.code }}|:+1:|

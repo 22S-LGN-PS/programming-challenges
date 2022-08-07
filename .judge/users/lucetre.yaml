@@ -1,0 +1,16 @@
+user: lucetre
+submits:
+  - problem: 100
+    code: lucetre/chap01/100/main.cpp
+  - problem: 10038
+    code: lucetre/chap02/10038/main.cpp
+  - problem: 10010
+    code: lucetre/chap03/10010/main.cpp
+  - problem: 10252
+    code: lucetre/chap03/10252/main.cpp
+  - problem: 10026
+    code: lucetre/chap04/10026/main.cpp
+  - problem: 10152
+    code: lucetre/chap04/10152/main.cpp
+  - problem: 10018
+    code: lucetre/chap05/10018/main.cpp
