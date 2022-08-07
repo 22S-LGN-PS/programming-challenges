@@ -10,15 +10,13 @@ for submit in "${SUBMITS[@]}"; do
   PROBLEM=$(jq '.problem' <<<"$submit")
   CODE=$(jq '.code' <<<"$submit")
 
-  echo $CODE
-  echo $PROBLEM
-
-  SUBMIT=$(jq -n \
+  SUBMIT=$(jq -n -r \
     --arg user $USER \
     --arg problem $PROBLEM \
-    --arg code "$CODE" \
+    --arg code "${CODE//\"/}" \
     '.user = $user | .problem = $problem | .code = $code')
+  echo $SUBMIT | jq
   SUBMISSION=$(echo $SUBMISSION $SUBMIT | jq -s '.[]')
 done
 
-echo $SUBMISSION | jq -s '.'
+# echo $SUBMISSION | jq -s '.'

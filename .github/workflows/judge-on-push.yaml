@@ -77,7 +77,7 @@ jobs:
             SUBMIT=$(jq -n -r \
               --arg user ${{ env.USER }} \
               --arg problem $PROBLEM \
-              --arg code "$CODE" \
+              --arg code "${CODE//\"/}" \
               '.user = $user | .problem = $problem | .code = $code')
             echo $SUBMIT
             SUBMISSION=$(echo $SUBMISSION $SUBMIT | jq -s '.[]')
