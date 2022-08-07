@@ -128,3 +128,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+  judge:
+    needs: gather-submission
+    strategy:
+      fail-fast: false
+      matrix: ${{fromJson(cat submission.json)}}
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Github Action Judge
+        run: sh .judge/submit.sh "${{ matrix.set.problem }}" "${{ matrix.set.code }}"
