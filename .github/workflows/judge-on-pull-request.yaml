@@ -1,4 +1,4 @@
-name: (PR) Github Action Judge
+name: PR - Github Action Judge
 
 on:
   pull_request:
@@ -14,7 +14,6 @@ jobs:
             code: "gracekim027/ShoeMaker'sProblem/src/test.java"
           - problem: 10018
             code: "gracekim027/ReverseandAdd/src/test.java"
-
 
     runs-on: ubuntu-latest
     timeout-minutes: 1

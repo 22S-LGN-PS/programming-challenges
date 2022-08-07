@@ -24,7 +24,7 @@
 
 ### Local Judge
 
-- Edit `judge.sh`
+- Run a local judge with bash shell
 
 ```
 sh .judge/submit.sh {{problem_no}} {{relative_path_of_code}}
