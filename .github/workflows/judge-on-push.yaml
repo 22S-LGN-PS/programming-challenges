@@ -109,7 +109,7 @@ jobs:
         id: gather-submission
         run: |
           cat submission.json
-          MATRIX=$(cat submission.json | jq -sc "{ \"include\": .[] }")
+          MATRIX=$(cat submission.json | jq -sc "{ \"set\": .[] }")
           echo $MATRIX
           echo "::set-output name=matrix::$MATRIX"
 
