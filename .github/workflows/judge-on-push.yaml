@@ -109,9 +109,9 @@ jobs:
         id: gather-submission
         run: |
           cat submission.json
-          MATRIX=$(cat submission.json | jq -sc "{ \"set\": .[] }")
-          echo $MATRIX
-          echo "::set-output name=matrix::$MATRIX"
+          cat submission.json | jq -sc "{ \"include\": .[] }" >submission
+          cat ./submission
+          echo "::set-output name=matrix::$(cat ./submission)"
 
   judge:
     needs: gather-submission
