@@ -1,4 +1,4 @@
-name: [Push] Github Action Judge
+name: \[Push\] Github Action Judge
 
 on:
   push:

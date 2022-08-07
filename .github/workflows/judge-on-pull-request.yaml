@@ -1,4 +1,4 @@
-name: [PR] Github Action Judge
+name: \[PR\] Github Action Judge
 
 on:
   pull_request:
