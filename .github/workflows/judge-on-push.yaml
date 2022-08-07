@@ -49,8 +49,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install yq
-        uses: mikefarah/yq@v4.27.2
+      # - name: Install yq
+      #   uses: mikefarah/yq@v4.27.2
 
       - name: Set up judge config via ${{ matrix.filepath }}
         run: |
@@ -111,7 +111,9 @@ jobs:
       - shell: bash
         id: gather-submission
         run: |
+          cat submission.json
           MATRIX=$(cat submission.json | jq -sc "{ \"include\": . }")
+          echo $MATRIX
           echo "::set-output name=matrix::$MATRIX"
 
   judge:
