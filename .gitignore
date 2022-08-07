@@ -65,3 +65,6 @@ Debug/
 *.tlog
 
 main
+.idea
+
+judge.sh
