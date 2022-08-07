@@ -110,11 +110,11 @@ jobs:
         id: gather-submission
         run: |
           cat submission.json
-          cat submission.json | jq -sc "{ \"set\": .[] }" >submission
-          cat ./submission
-          echo "::set-output name=matrix::$(cat ./submission)"
+          MATRIX=$(cat submission.json | jq -sc "{ \"set\": .[] }")
+          echo "::set-output name=matrix::$MATRIX"
 
   judge:
+    name: Run judge
     needs: gather-submission
     strategy:
       fail-fast: false
