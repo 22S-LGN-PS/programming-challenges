@@ -46,7 +46,7 @@ jobs:
       matrix: ${{fromJson(needs.set-up-judge.outputs.matrix)}}
 
     outputs:
-      max-parallel: 1
+      # max-parallel: 1
       matrix: ${{ steps.submitjudge.outputs.matrix }}
 
     steps:
