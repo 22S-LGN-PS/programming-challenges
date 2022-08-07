@@ -74,7 +74,7 @@ jobs:
           for submit in "${SUBMITS[@]}"; do
             PROBLEM=$(jq '.problem' <<<"$submit")
             CODE=$(jq '.code' <<<"$submit")
-            SUBMIT=$(jq -n \
+            SUBMIT=$(jq -n -r \
               --arg user ${{ env.USER }} \
               --arg problem $PROBLEM \
               --arg code "$CODE" \
