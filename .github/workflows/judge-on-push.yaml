@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      matrix: ${{ steps.setmatrix.outputs.matrix }}
+      matrix: ${{ steps.set-up-judge.outputs.matrix }}
 
     steps:
       - uses: actions/checkout@v3
 
-      - id: setmatrix
+      - id: set-up-judge
         name: Configure judge
         run: |
           USERS=$(find .judge/users -name '*.yaml')
@@ -43,11 +43,8 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
-      matrix: ${{fromJson(needs.set-up-judge.outputs.matrix)}}
-
-    outputs:
       max-parallel: 1
-      matrix: ${{ steps.submitjudge.outputs.matrix }}
+      matrix: ${{fromJson(needs.set-up-judge.outputs.matrix)}}
 
     steps:
       - uses: actions/checkout@v3
@@ -70,12 +67,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: submission
-
-      - name: Submit to judge
-        id: submitjudge
-        run: |
-          MATRIX=$(jq -c "{ \"include\": . }" <<<$SUBMIT_JSON)
-          echo "::set-output name=matrix::$MATRIX"
 
       - name: Add a new submission
         shell: bash
@@ -108,6 +99,9 @@ jobs:
     needs: submit-judge
     runs-on: ubuntu-latest
 
+    outputs:
+      matrix: ${{ steps.gather-submission.outputs.matrix }}
+
     steps:
       - name: Fetch submission
         uses: actions/download-artifact@v3
@@ -115,25 +109,16 @@ jobs:
           name: submission
 
       - shell: bash
+        id: gather-submission
         run: |
-          cat submission.json
-
-  run-judge:
-    name: Run Judge
-    needs: gather-submission
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix: ${{fromJson(needs.submit-judge.outputs.matrix)}}
-
-    steps:
-      - uses: actions/checkout@v3
+          MATRIX=$(cat submission.json | jq -sc "{ \"include\": . }")
+          echo "::set-output name=matrix::$MATRIX"
 
   judge:
     needs: gather-submission
     strategy:
       fail-fast: false
-      matrix: ${{fromJson(cat submission.json)}}
+      matrix: ${{fromJson(needs.gather-judge.outputs.matrix)}}
 
     runs-on: ubuntu-latest
     timeout-minutes: 1
