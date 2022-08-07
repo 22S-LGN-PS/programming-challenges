@@ -46,7 +46,7 @@ jobs:
       matrix: ${{fromJson(needs.set-up-judge.outputs.matrix)}}
 
     outputs:
-      # max-parallel: 1
+      max-parallel: 1
       matrix: ${{ steps.submitjudge.outputs.matrix }}
 
     steps:
@@ -89,7 +89,7 @@ jobs:
             SUBMIT=$(jq -n \
               --arg user ${{ env.USER }} \
               --arg problem $PROBLEM \
-              --arg code $CODE \
+              --arg code "$CODE" \
               '.user = $user | .problem = $problem | .code = $code')
             SUBMISSION=$(echo $SUBMISSION $SUBMIT | jq -s '.[]')
           done
