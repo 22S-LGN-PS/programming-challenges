@@ -9,10 +9,8 @@ jobs:
       fail-fast: false
       matrix:
         set:
-          - problem: 10026
-            code: "gracekim027/ShoeMaker'sProblem/src/test.java"
-          - problem: 10018
-            code: "gracekim027/ReverseandAdd/src/test.java"
+          - problem: 846
+            code: "gracekim027/Steps/src/test.java"
 
     runs-on: ubuntu-latest
     timeout-minutes: 1
