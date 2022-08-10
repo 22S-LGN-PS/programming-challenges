@@ -3,11 +3,12 @@ import java.util.*;
 public class test {
     public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
-
-        while (sc.hasNextInt()){
-            StringBuilder sb = new StringBuilder();
-            sb.append(command(sc.nextInt()));
-            System.out.println(sb);
+        try{
+        while (sc.hasNextLine()) {
+            System.out.println(command(Integer.parseInt(sc.nextLine())));
+        }
+    }catch(Exception e){
+            System.exit(0);
         }
         System.exit(0);
     }
