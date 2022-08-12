@@ -1,14 +1,19 @@
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 public class test {
     public static void main(String args[]) {
-        Scanner sc = new Scanner(System.in);
-        try{
-        while (sc.hasNextLine()) {
-            System.out.println(command(Integer.parseInt(sc.nextLine())));
-        }
-    }catch(Exception e){
-            System.exit(0);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        while(true){
+            try{
+                String input = br.readLine();
+                if (input.isEmpty()){
+                    break;
+                }
+                System.out.println(command(Integer.parseInt(input)));
+            }catch (Exception e){
+                System.out.println(e);
+            }
         }
         System.exit(0);
     }

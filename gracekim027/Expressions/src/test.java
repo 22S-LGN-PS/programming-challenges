@@ -1,15 +1,27 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 
 public class test {
     public static void main(String args[]) {
-        Scanner sc = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
 
-        while (sc.hasNextInt()) {
-            int length = sc.nextInt();
-            int depth = sc.nextInt();
-            sb.append(command(length, depth)).append('\n');
+        while (true){
+            try{
+                String input = br.readLine();
+                if (input.isEmpty()){
+                    break;
+                }
+                int length = Integer.parseInt(input.split("\\s+")[0]);
+                int depth = Integer.parseInt(input.split("\\s+")[1]);
+                System.out.println(command(length, depth));
+
+            }catch (Exception e){
+                System.out.println(e);
+            }
         }
+
         System.out.println(sb.toString().trim());
         System.exit(0);
     }
