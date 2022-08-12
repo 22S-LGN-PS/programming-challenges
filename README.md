@@ -1,5 +1,7 @@
 # Programming Challenges
 
+[![Github Action Judge](https://github.com/22S-LGN-PS/programming-challenges/actions/workflows/judge-on-push.yaml/badge.svg)](https://github.com/22S-LGN-PS/programming-challenges/actions/workflows/judge-on-push.yaml)
+
 ##### 2022 Summer Programming Challenges Study
 
 ### Book
@@ -24,7 +26,7 @@
 
 ### Local Judge
 
-- Edit `judge.sh`
+- Run a local judge with bash shell
 
 ```
 sh .judge/submit.sh {{problem_no}} {{relative_path_of_code}}

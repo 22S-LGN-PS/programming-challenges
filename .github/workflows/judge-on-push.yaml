@@ -1,0 +1,130 @@
+name: Github Action Judge
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  set-up-judge:
+    name: Set-up Judge
+    runs-on: ubuntu-latest
+
+    outputs:
+      matrix: ${{ steps.set-up-judge.outputs.matrix }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - id: set-up-judge
+        name: Configure judge
+        run: |
+          USERS=$(find .judge/users -name '*.yaml')
+          echo "$USERS" |
+              jq --slurp --raw-input 'split("\n")[:-1]' |
+              jq "{\"filepath\": .[] }" |
+              jq -sc "{ \"include\": . }" >users
+          cat ./users
+
+          matrixStringifiedObject=$(cat ./users)
+          echo "::set-output name=matrix::$matrixStringifiedObject"
+
+      - name: Create an empty submission
+        run: echo [] > submission.json
+
+      - name: Upload submission
+        uses: actions/upload-artifact@v3
+        with:
+          name: submission
+          path: submission.json
+
+  submit-judge:
+    name: Submit to Judge
+    needs: set-up-judge
+    runs-on: ubuntu-latest
+
+    strategy:
+      max-parallel: 1
+      matrix: ${{fromJson(needs.set-up-judge.outputs.matrix)}}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up judge config via ${{ matrix.filepath }}
+        run: |
+          json=`cat ${{ matrix.filepath }} | yq e -o=json`
+          echo "SUBMIT_JSON=`echo $(jq -r '.submits' <<< "$json")`" >> $GITHUB_ENV
+          echo "USER=`echo $(jq -r '.user' <<< "$json")`" >> $GITHUB_ENV
+
+      - name: Display submission info
+        run: |
+          echo 'USER: ${{ env.USER }}'
+          echo 'SUBMIT_JSON: ${{ env.SUBMIT_JSON }}'
+
+      - name: Fetch submission
+        uses: actions/download-artifact@v3
+        with:
+          name: submission
+
+      - name: Add a new submission
+        shell: bash
+        run: |
+          SUBMISSION=$(cat submission.json | jq '.[]')
+          readarray -t SUBMITS < <(jq -c '.[]' <<<'${{ env.SUBMIT_JSON }}')
+
+          for submit in "${SUBMITS[@]}"; do
+            PROBLEM=$(jq '.problem' <<<"$submit")
+            CODE=$(jq '.code' <<<"$submit")
+            SUBMIT=$(jq -n -r \
+              --arg user ${{ env.USER }} \
+              --arg problem $PROBLEM \
+              --arg code "${CODE//\"/}" \
+              '.user = $user | .problem = $problem | .code = $code')
+            echo $SUBMIT
+            SUBMISSION=$(echo $SUBMISSION $SUBMIT | jq -s '.[]')
+          done
+
+          echo $SUBMISSION | jq -s '.'
+          echo $SUBMISSION | jq -s '.' > submission.json
+
+      - name: Update submission
+        uses: actions/upload-artifact@v3
+        with:
+          name: submission
+          path: submission.json
+
+  gather-submission:
+    name: Gather submissions
+    needs: submit-judge
+    runs-on: ubuntu-latest
+
+    outputs:
+      matrix: ${{ steps.gather-submission.outputs.matrix }}
+
+    steps:
+      - name: Fetch submission
+        uses: actions/download-artifact@v3
+        with:
+          name: submission
+
+      - shell: bash
+        id: gather-submission
+        run: |
+          cat submission.json
+          MATRIX=$(cat submission.json | jq -sc "{ \"set\": .[] }")
+          echo "::set-output name=matrix::$MATRIX"
+
+  judge:
+    name: Run judge
+    needs: gather-submission
+    strategy:
+      fail-fast: false
+      matrix: ${{fromJson(needs.gather-submission.outputs.matrix)}}
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Github Action Judge
+        run: sh .judge/submit.sh "${{ matrix.set.problem }}" "${{ matrix.set.code }}"
