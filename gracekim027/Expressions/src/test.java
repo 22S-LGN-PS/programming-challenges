@@ -1,6 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
+//101157
 
 public class test {
     public static void main(String args[]) {
@@ -26,26 +26,29 @@ public class test {
         System.exit(0);
     }
 
-    public static int command(int length, int depth) {
+    public static long command(int length, int depth) {
        // () --> length 2 depth 1
         // (()) --> length 4 depth 2
         //if everything is inside of everything the max length is 2*depth
         //so if length > depth, then (length-depth)/2 pairs have to be single
-        //뭐야 그냥 inside + single 배열 개수 구하는거네
+        //..? 아닌데
 
         if (length == depth*2){
             return 1;
+        }else if (length < depth*2){
+            return 0;
         }else{
             int singles = (length-depth)/2;
+            System.out.println(singles);
             //multiples = (length - 2*singles)/2
             int multiples = (depth)/2;
+            System.out.println(multiples);
             return factorial(singles+multiples)/(factorial(singles)*factorial(multiples));
-
         }
     }
 
-    public static int factorial(int num){
-        int result = 1;
+    public static long factorial(int num){
+        long result = 1;
         while (num > 1){
             result = result * num;
             num = num-1;
