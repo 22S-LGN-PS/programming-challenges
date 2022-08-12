@@ -4,17 +4,20 @@ import java.io.InputStreamReader;
 public class test {
     public static void main(String args[]) {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+
         while(true){
             try{
                 String input = br.readLine();
                 if (input.isEmpty()){
                     break;
                 }
-                System.out.println(command(Integer.parseInt(input)));
+                sb.append(command(Integer.parseInt(input))).append("\n");
             }catch (Exception e){
                 System.out.println(e);
             }
         }
+        System.out.println(sb.toString().trim());
         System.exit(0);
     }
 

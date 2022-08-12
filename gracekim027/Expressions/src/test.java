@@ -15,7 +15,7 @@ public class test {
                 }
                 int length = Integer.parseInt(input.split("\\s+")[0]);
                 int depth = Integer.parseInt(input.split("\\s+")[1]);
-                System.out.println(command(length, depth));
+                sb.append(command(length, depth)).append('\n');
 
             }catch (Exception e){
                 System.out.println(e);
