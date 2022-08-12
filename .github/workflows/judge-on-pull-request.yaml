@@ -9,8 +9,11 @@ jobs:
       fail-fast: false
       matrix:
         set:
-          - problem: 846
-            code: "gracekim027/Steps/src/test.java"
+          - problem: 10127
+            code: "gracekim027/Ones/src/test.java"
+
+          - problem: 10157
+            code: "gracekim027/Expressions/src/test.java"
 
     runs-on: ubuntu-latest
     timeout-minutes: 1
