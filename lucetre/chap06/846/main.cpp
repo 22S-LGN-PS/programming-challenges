@@ -3,11 +3,11 @@ using namespace std;
 
 int get_min_steps_of_length(int len)
 {
-    int step = 1, total_steps = 1;
+    int step = 0, total_steps = 0;
     while (total_steps < len)
     {
         step++;
-        total_steps += step / 2;
+        total_steps += (step + 1) / 2;
     }
     return step;
 }
