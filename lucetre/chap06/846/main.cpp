@@ -1,9 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int get_min_steps_of_length(int len)
+long long get_min_steps_of_length(long long len)
 {
-    int step = 0, total_steps = 0;
+    long long step = 0, total_steps = 0;
     while (total_steps < len)
     {
         step++;
@@ -18,8 +18,9 @@ int main()
     cin >> n;
     for (int i = 0; i < n; i++)
     {
-        int x, y;
+        long long x, y;
         cin >> x >> y;
+        cout << x << " " << y << endl;
         cout << get_min_steps_of_length(abs(x - y)) << endl;
     }
 
