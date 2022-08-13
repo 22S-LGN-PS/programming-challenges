@@ -1,6 +1,17 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+int get_min_steps_of_length(int len)
+{
+    int step = 1, total_steps = 1;
+    while (total_steps < len)
+    {
+        step++;
+        total_steps += step / 2;
+    }
+    return step;
+}
+
 int main()
 {
     int n;
@@ -9,11 +20,7 @@ int main()
     {
         int x, y;
         cin >> x >> y;
-        int len = abs(x - y);
-        if (len < 2)
-            cout << len << endl;
-        else
-            cout << (len + 1) / 2 + 1 << endl;
+        cout << get_min_steps_of_length(abs(x - y)) << endl;
     }
 
     return 0;
