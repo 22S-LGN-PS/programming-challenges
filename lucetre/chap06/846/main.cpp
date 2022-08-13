@@ -20,7 +20,6 @@ int main()
     {
         long long x, y;
         cin >> x >> y;
-        cout << x << " " << y << endl;
         cout << get_min_steps_of_length(abs(x - y)) << endl;
     }
 
