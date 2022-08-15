@@ -49,13 +49,13 @@ int main()
         }
         else
         {
-            // res = 0;
-            // for (int i = 0; i < 2 * n; i++)
-            //     sub_diagonal[i] = add_diagonal[i] = 0;
-            // FindAvailableBishopPositions(0, 0);
-            // cout << res << endl;
+            res = 0;
+            for (int i = 0; i < 2 * n; i++)
+                sub_diagonal[i] = add_diagonal[i] = 0;
+            FindAvailableBishopPositions(0, 0);
+            cout << res << endl;
 
-            cout << bishops[n][k] << endl;
+            // cout << bishops[n][k] << endl;
         }
     }
     return 0;
