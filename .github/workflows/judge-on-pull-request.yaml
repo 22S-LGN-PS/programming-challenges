@@ -15,6 +15,8 @@ jobs:
             code: lucetre/chap06/10157/main.cpp
           - problem: 846
             code: lucetre/chap06/846/main.cpp
+          - problem: 861
+            code: lucetre/chap08/861/main.cpp
 
     runs-on: ubuntu-latest
     timeout-minutes: 1
