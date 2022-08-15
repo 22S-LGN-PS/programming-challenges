@@ -19,7 +19,7 @@ jobs:
             code: lucetre/chap08/861/main.cpp
 
     runs-on: ubuntu-latest
-    timeout-minutes: 1
+    timeout-minutes: 10
 
     steps:
       - uses: actions/checkout@v3
