@@ -17,7 +17,7 @@ jobs:
             code: "nick11967/Ch 6/48 Steps/steps.cpp"
 
     runs-on: ubuntu-latest
-    timeout-minutes: 1
+    timeout-minutes: 10
 
     steps:
       - uses: actions/checkout@v3
