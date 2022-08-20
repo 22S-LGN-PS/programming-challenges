@@ -14,3 +14,7 @@ submits:
     code: lucetre/chap04/10152/main.cpp
   - problem: 10018
     code: lucetre/chap05/10018/main.cpp
+  - problem: 10127
+    code: lucetre/chap05/10127/main.cpp
+  - problem: 846
+    code: lucetre/chap06/846/main.cpp
