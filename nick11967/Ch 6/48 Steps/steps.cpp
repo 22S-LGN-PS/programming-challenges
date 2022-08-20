@@ -4,7 +4,7 @@
 
 using namespace std;
 
-vector<int> max_len;
+vector<long long> max_len;
 
 int step(int x)
 {
@@ -20,7 +20,7 @@ int step(int x)
     }
     while (1)
     {
-        max_len.push_back(max_len[size - 1] + (int)floor((double)size / 2 + 0.5));
+        max_len.push_back(max_len[size - 1] + (size + 1) / 2);
         size++;
         // printf("#%d: %d\n", size - 1, max_len[size - 1]);
         if (x <= max_len[size - 1])
