@@ -4,15 +4,15 @@
 
 using namespace std;
 
-vector<long long> max_len;
+vector<unsigned int> max_len;
 
 int step(int x)
 {
-    int steps;
+    if (x == 0)
+        return 0;
     int size = max_len.size();
     for (int i = 1; i < size; i++)
     {
-        // printf("#%d: %d\n", i, max_len[i]);
         if (x <= max_len[i])
         {
             return i;
@@ -22,13 +22,11 @@ int step(int x)
     {
         max_len.push_back(max_len[size - 1] + (size + 1) / 2);
         size++;
-        // printf("#%d: %d\n", size - 1, max_len[size - 1]);
         if (x <= max_len[size - 1])
         {
             return size - 1;
         }
     }
-    return steps;
 }
 
 int main()
