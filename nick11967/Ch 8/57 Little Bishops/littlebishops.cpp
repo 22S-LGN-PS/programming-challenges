@@ -15,8 +15,9 @@ bool possible(int x, int y)
 {
     for (int i = 0; i < num; i++)
     {
-        if (abs(pos[num][0] - x) == abs(pos[num][1] - y))
+        if (abs(pos[i][0] - x) == abs(pos[i][1] - y))
         {
+            // printf("(%d, %d), (%d, %d) not possible\n", pos[i][0], pos[i][1], x, y);
             return false;
         }
     }
@@ -35,7 +36,11 @@ long long bishop(int x, int y)
         pos[num][0] = x;
         pos[num][1] = y;
         num++;
-        ans = (y + 1 == n) ? bishop(x + 1, 0) : bishop(x, y + 1);
+        // printf("#%d log (%d, %d)\n", num, x, y);
+        if (num == k)
+            ans++;
+        else
+            ans = (y + 1 == n) ? bishop(x + 1, 0) : bishop(x, y + 1);
         num--;
     }
     ans += (y + 1 == n) ? bishop(x + 1, 0) : bishop(x, y + 1);
