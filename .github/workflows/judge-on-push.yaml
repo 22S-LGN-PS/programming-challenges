@@ -121,7 +121,7 @@ jobs:
       matrix: ${{fromJson(needs.gather-submission.outputs.matrix)}}
 
     runs-on: ubuntu-latest
-    timeout-minutes: 1
+    timeout-minutes: 10
 
     steps:
       - uses: actions/checkout@v3
