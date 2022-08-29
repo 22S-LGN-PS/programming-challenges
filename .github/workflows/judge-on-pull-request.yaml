@@ -18,6 +18,7 @@ jobs:
           - problem: 861
             code: "nick11967/Ch 8/57 Little Bishops/littlebishops.cpp"
 
+
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
