@@ -55,7 +55,10 @@ int main()
 
     while (scanf("%d %d", &n, &d) != EOF)
     {
-        printf("%lld\n", f[n / 2][d] - f[n / 2][d - 1]);
+        if (n % 2 == 1)
+            printf("0\n");
+        else
+            printf("%lld\n", f[n / 2][d] - f[n / 2][d - 1]);
     }
     return 0;
 }
