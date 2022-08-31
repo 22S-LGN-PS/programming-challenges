@@ -11,7 +11,12 @@ public class test {
         while( sc.hasNext() ) {
             length = sc.nextInt();
             depth = sc.nextInt();
-            System.out.println( (command(length/2,depth).subtract(command(length/2,depth-1))) );
+            //when length is odd
+            if (length % 2 != 0){
+                System.out.println(0);
+            }else {
+                System.out.println((command(length / 2, depth).subtract(command(length / 2, depth - 1))));
+            }
         }
 
         sc.close();
