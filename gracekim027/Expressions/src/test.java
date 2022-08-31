@@ -1,58 +1,41 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-//101157
+import java.util.*;
+import java.math.BigInteger;
 
 public class test {
-    public static void main(String args[]) {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
+    private final static BigInteger[][] F = new BigInteger[151][151];
 
-        while (true){
-            try{
-                String input = br.readLine();
-                if (input.isEmpty()){
-                    break;
-                }
-                int length = Integer.parseInt(input.split("\\s+")[0]);
-                int depth = Integer.parseInt(input.split("\\s+")[1]);
-                sb.append(command(length, depth)).append('\n');
+    public static void main( String[] args ) {
+        Scanner sc = new Scanner(System.in);
+        int length, depth;
 
-            }catch (Exception e){
-                System.out.println(e);
-            }
+        while( sc.hasNext() ) {
+            length = sc.nextInt();
+            depth = sc.nextInt();
+            System.out.println( (command(length/2,depth).subtract(command(length/2,depth-1))) );
         }
 
-        System.out.println(sb.toString().trim());
-        System.exit(0);
+        sc.close();
     }
 
-    public static long command(int length, int depth) {
-       // () --> length 2 depth 1
-        // (()) --> length 4 depth 2
-        //if everything is inside of everything the max length is 2*depth
-        //so if length > depth, then (length-depth)/2 pairs have to be single
-        //..? 아닌데
+    private static BigInteger command(int length, int depth ) {
+        //if pair is already recorded
+        if( F[length][depth] != null ) return F[length][depth];
 
-        if (length == depth*2){
-            return 1;
-        }else if (length < depth*2){
-            return 0;
-        }else{
-            int singles = (length-depth)/2;
-            System.out.println(singles);
-            //multiples = (length - 2*singles)/2
-            int multiples = (depth)/2;
-            System.out.println(multiples);
-            return factorial(singles+multiples)/(factorial(singles)*factorial(multiples));
-        }
-    }
+        //if length = 0
+        if( length == 0 ) return F[length][depth] = BigInteger.valueOf(1);
 
-    public static long factorial(int num){
-        long result = 1;
-        while (num > 1){
-            result = result * num;
-            num = num-1;
+        //if depth = 0
+        if( depth==0 ) return F[length][depth] = BigInteger.valueOf(0);
+
+        //!null
+        F[length][depth] = BigInteger.valueOf(0);
+
+        //책에 나온 식
+        for( int i=0; i <= length-1; ++i ){
+            BigInteger tmp = command(i,depth-1).multiply(command(length-i-1,depth));
+            F[length][depth] = F[length][depth].add(tmp);
         }
-        return result;
+
+        return F[length][depth];
     }
 }

@@ -33,7 +33,6 @@ public class test {
         }else if (stepsLeft <= maxSteps && stepsLeft > 0){
             times += 1;
         }
-
         return times;
     }
 }
