@@ -18,7 +18,7 @@ long bishop_placements(int n, int k)
     if (k > 2 * n - 1)
         return 0;
 
-    long dp[n * 2][k + 1];
+    long dp[1600][801];
     for (int i = 0; i < n * 2; i++)
     {
         for (int j = 0; j < k + 1; j++)
