@@ -9,9 +9,6 @@ jobs:
       fail-fast: false
       matrix:
         set:
-          - problem: 10127
-            code: "gracekim027/Ones/src/test.java"
-
           - problem: 10157
             code: "gracekim027/Expressions/src/test.java"
 
