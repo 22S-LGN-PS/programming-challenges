@@ -108,6 +108,8 @@ int main()
     {
         if (n % 2 == 1)
             printf("0\n");
+        else if (n * 2 - 2 < d)
+            printf("0\n");
         else
             printf("%lld\n", f[n / 2][d] - f[n / 2][d - 1]);
     }
