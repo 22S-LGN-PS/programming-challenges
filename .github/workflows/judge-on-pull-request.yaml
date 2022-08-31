@@ -10,7 +10,11 @@ jobs:
       matrix:
         set:
           - problem: 10157
-            code: "gracekim027/Expressions/src/test.java"
+            code: lucetre/chap06/10157/main.cpp
+          - problem: 846
+            code: lucetre/chap06/846/main.cpp
+          - problem: 861
+            code: lucetre/chap08/861/main.cpp
 
     runs-on: ubuntu-latest
     timeout-minutes: 10
