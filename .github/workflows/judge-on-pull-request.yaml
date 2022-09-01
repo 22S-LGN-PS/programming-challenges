@@ -9,12 +9,14 @@ jobs:
       fail-fast: false
       matrix:
         set:
+          - problem: 10127
+            code: "nick11967/Ch 5/36 Ones/ones.cpp"
           - problem: 10157
-            code: lucetre/chap06/10157/main.cpp
+            code: "nick11967/Ch 6/44 Expressions/expressions2.cpp"
           - problem: 846
-            code: lucetre/chap06/846/main.cpp
+            code: "nick11967/Ch 6/48 Steps/steps.cpp"
           - problem: 861
-            code: lucetre/chap08/861/main.cpp
+            code: "nick11967/Ch 8/57 Little Bishops/littlebishops.cpp"
 
     runs-on: ubuntu-latest
     timeout-minutes: 10
