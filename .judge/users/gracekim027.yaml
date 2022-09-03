@@ -14,3 +14,9 @@ submits:
     code: gracekim027/ShellSort/src/test.java
   - problem: 10018
     code: gracekim027/ReverseandAdd/src/test.java
+  - problem: 10127
+    code: gracekim027/Ones/src/test.java
+  - problem: 10157
+    code: gracekim027/Expressions/src/test.java
+  - problem: 846
+    code: gracekim027/Steps/src/test.java
