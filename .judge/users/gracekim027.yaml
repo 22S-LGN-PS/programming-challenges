@@ -2,3 +2,15 @@ user: gracekim027
 submits:
   - problem: 100
     code: gracekim027/3n+1/src/test.java
+  - problem: 10038
+    code: gracekim027/JollyJumper/src/test.java
+  - problem: 10010
+    code: gracekim027/Waldorf/src/test.java
+  - problem: 10252
+    code: gracekim027/CommonPermutation/src/test.java
+  - problem: 10026
+    code: gracekim027/ShoeMaker'sProblem/src/test.java
+  - problem: 10152
+    code: gracekim027/ShellSort/src/test.java
+  - problem: 10018
+    code: gracekim027/ReverseandAdd/src/test.java

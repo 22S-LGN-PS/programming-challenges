@@ -8,5 +8,13 @@ submits:
     code: nick11967/Ch 3/18 Wheres Waldorf/waldorf.cpp
   - problem: 10252
     code: nick11967/Ch 3/19 Common Permutation/common_permutation.cpp
+  - problem: 10026
+    code: nick11967/Ch 4/29 Shoemakers Problem/shoemakers_problem.cpp
+  - problem: 10152
+    code: nick11967/Ch 4/31 ShellSort/shellsort.cpp
+  - problem: 10018
+    code: nick11967/Ch 5/10018 Reverse and Add/reverseandadd.cpp
+  - problem: 10018
+    code: nick11967/Ch 5/10018 Reverse and Add/reverseandadd.cpp
   - problem: 10018
     code: nick11967/Ch 5/10018 Reverse and Add/reverseandadd.cpp
