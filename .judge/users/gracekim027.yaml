@@ -8,8 +8,8 @@ submits:
     code: gracekim027/Waldorf/src/test.java
   - problem: 10252
     code: gracekim027/CommonPermutation/src/test.java
-  - problem: 10026
-    code: gracekim027/ShoeMaker'sProblem/src/test.java
+  # - problem: 10026
+  #   code: gracekim027/ShoeMaker'sProblem/src/test.java
   - problem: 10152
     code: gracekim027/ShellSort/src/test.java
   - problem: 10018
