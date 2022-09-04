@@ -17,8 +17,8 @@ submits:
   - problem: 10127
     code: nick11967/Ch 5/36 Ones/ones.cpp
   - problem: 10157
-    code: nick11967/Ch 6/44 Expressions/expressions.cpp
+    code: nick11967/Ch 6/44 Expressions/expressions2.cpp
   - problem: 846
     code: nick11967/Ch 6/48 Steps/steps.cpp
-  - problem: 861
-    code: nick11967/Ch 8/57 Little Bishops/littlebishops.cpp
+  # - problem: 861
+  #   code: nick11967/Ch 8/57 Little Bishops/littlebishops.cpp
